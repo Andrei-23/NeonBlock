@@ -278,7 +278,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 385983183}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -3013,6 +3013,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Win
       objectReference: {fileID: 0}
+    - target: {fileID: 4708468707340296616, guid: 177425dd02e98c64b84962242ddc73bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6056102147272771083, guid: 177425dd02e98c64b84962242ddc73bc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4165,7 +4169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1468354111
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5271,7 +5275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1851274189
 RectTransform:
   m_ObjectHideFlags: 0

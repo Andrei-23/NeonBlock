@@ -336,7 +336,7 @@ public class InteractionManager : MonoBehaviour
                     if (InBounds(ny, x) && !glass[ny][x].IsSolid())
                     {
                         flag = true;
-                        glass[ny][x] = new Block(Block.Type.Default);
+                        glass[ny][x] = new Block(Block.Type.Default, 6);
                     }
                 }
                 return flag;
@@ -351,7 +351,7 @@ public class InteractionManager : MonoBehaviour
                     int ny = dy[i] + y;
                     if (InBounds(ny, nx) && glass[ny][nx].type != Block.Type.Empty && glass[ny][nx].type != Block.Type.Default)
                     {
-                        glass[ny][nx] = new Block(Block.Type.Default);
+                        glass[ny][nx] = new Block(Block.Type.Default, 8);
                     }
                 }
                 return true;
@@ -739,7 +739,7 @@ public class InteractionManager : MonoBehaviour
                         break;
 
                     case Block.Type.TempEnergy:
-                        glass[y][x] = new Block(Block.Type.Default);
+                        glass[y][x] = new Block(Block.Type.Default, 1);
                         flag = true;
                         break;
                     case Block.Type.TempHeal:
@@ -798,7 +798,7 @@ public class InteractionManager : MonoBehaviour
                         case Block.Type.Ghost:
                             if (glass[y][x].type == Block.Type.Ghost)
                             {
-                                glass[y][x] = new Block(Block.Type.Default, b.color);
+                                glass[y][x] = new Block(Block.Type.Default, 0);
                             }
                             else if (glass[y][x].type == Block.Type.Empty)
                             {

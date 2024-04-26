@@ -34,7 +34,7 @@ public class BlockDataManager : MonoBehaviour
     [HideInInspector] public List<string> blockName;
     [HideInInspector] public List<string> description;
 
-    public static int color_count = 6;
+    public static int color_count = 9;
     public List<Color> colors;
 
     public void Awake()

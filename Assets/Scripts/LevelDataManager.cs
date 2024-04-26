@@ -423,6 +423,7 @@ public class LevelDataManager
         // BOSSES
         {
             
+
             data.Add(new LevelData()
             {
                 glass = ReadLevel(new List<string> {
@@ -440,7 +441,7 @@ public class LevelDataManager
                 delete_from_top = true,
                 type = LevelType.boss,
             });
-            
+
             List<Block.Type> oneKeyList = new List<Block.Type> { Block.Type.Key };
             List<Block.Type> oneLockList = new List<Block.Type> { Block.Type.Lock };
             // key & lock pieces
@@ -465,8 +466,8 @@ public class LevelDataManager
                     }, oneLockList),
                     PieceData.Instance.ReadPiece(new List<string>
                     {
-                        "#  ",
-                        "#*#",
+                        "*  ",
+                        "###",
                         "   "
                     }, oneLockList),
                     PieceData.Instance.ReadPiece(new List<string>
@@ -477,20 +478,9 @@ public class LevelDataManager
                     }, oneLockList),
                     PieceData.Instance.ReadPiece(new List<string>
                     {
-                        "*# ",
-                        " ##",
+                        "## ",
+                        " *#",
                         "   "
-                    }, oneLockList),
-                    PieceData.Instance.ReadPiece(new List<string>
-                    {
-                        " # ",
-                        "#*#",
-                        "   "
-                    }, oneLockList),
-                    PieceData.Instance.ReadPiece(new List<string>
-                    {
-                        "#*",
-                        "##",
                     }, oneLockList),
 
 
@@ -509,14 +499,16 @@ public class LevelDataManager
                     PieceData.Instance.ReadPiece(new List<string>
                     {
                         "    ",
-                        "###*",
+                        "#**#",
                         "    ",
                         "    ",
                     }, oneKeyList),
+
+                    // cleaner
                     PieceData.Instance.ReadPiece(new List<string>
                     {
                         "*",
-                    }, oneKeyList),
+                    }, new List<Block.Type> { Block.Type.Cleaner }),
                 }
             });
         }

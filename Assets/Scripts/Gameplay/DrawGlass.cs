@@ -174,7 +174,7 @@ public class DrawGlass : MonoBehaviour
                         {
                             if (glass[y][x].type == Block.Type.Ghost)
                             {
-                                DrawBlock(pos, new Block(Block.Type.Default, pm.shape[i][j].color));
+                                DrawBlock(pos, new Block(Block.Type.Default, 0));
                             }
                             else if (glass[y][x].IsEmpty())
                             {

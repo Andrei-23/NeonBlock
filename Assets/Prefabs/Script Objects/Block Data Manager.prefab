@@ -264,7 +264,7 @@ MonoBehaviour:
         prior: -10
         isMultiColor: 0
         blockName: Purifier
-        description: Changes adjacent blocks to default blocks in put
+        description: Changes adjacent blocks to default blocks on put
     - name: Lock
       value:
         sprite: {fileID: 5079683901481405722, guid: d969f5ad554280846992bebc46d8e89c, type: 3}
@@ -353,3 +353,5 @@ MonoBehaviour:
   - {r: 0.96862745, g: 0.5137255, b: 0.92941177, a: 1}
   - {r: 0.7176471, g: 0.627451, b: 0.1764706, a: 1}
   - {r: 0.07910103, g: 0.517, b: 0.48572153, a: 1}
+  - {r: 0.19003908, g: 0.81886786, b: 0.45060346, a: 1}
+  - {r: 1, g: 1, b: 1, a: 1}

@@ -5050,7 +5050,7 @@ Canvas:
   m_RenderMode: 1
   m_Camera: {fileID: 460966103}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -7596,7 +7596,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 318462052}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99623704
+  m_Size: 0.996072
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8358,7 +8358,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1759919309}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.38400003
+  m_Size: 0
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
