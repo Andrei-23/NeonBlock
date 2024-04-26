@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 78f92674795f14f43b1cb25590b74951
+  - enabled: 1
+    path: Assets/Scenes/New Piece.unity
+    guid: 2083ed1f47f2edb40968076f8d59f83b
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: e2033ad4589eb6045bc154de61794e1c
+  - enabled: 1
+    path: Assets/Scenes/Death Scene.unity
+    guid: d3cd3c941fc79fc45a060bee83513644
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 4941759b54354a642b8bbff55fb5a0c1
+  - enabled: 1
+    path: Assets/Scenes/New Relic.unity
+    guid: d5484f924ae135c4c9b08fdb38868345
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: df74ea7e2c7322f41bec1c03d75ce650
+  - enabled: 1
+    path: Assets/Scenes/Win Scene.unity
+    guid: 70bdce85f784e244290bc8c4c0708c62
+  - enabled: 1
+    path: Assets/Scenes/Delete Piece.unity
+    guid: df5399a2a989d2a4b901869e07d588af
+  m_configObjects: {}

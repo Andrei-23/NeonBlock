@@ -1,0 +1,355 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4767380255018856019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7684856092511610238}
+  - component: {fileID: 7141603883108943458}
+  m_Layer: 0
+  m_Name: Block Data Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7684856092511610238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767380255018856019}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7141603883108943458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4767380255018856019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33fb73f9b3f327d41a2c90c73852ebf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockPrefab: {fileID: 8839277711457316722, guid: 1e161006f4eef50439c7af60ef16c8a7, type: 3}
+  DefaultSprite: {fileID: 4888904824014766370, guid: 94f09c5201636424d83282f90d15db66, type: 3}
+  TypeDataMap:
+    _map:
+    - name: Default
+      value:
+        sprite: {fileID: 490004995802724989, guid: 46883aecfa556c14e842b2e79a4c9cc6, type: 3}
+        prior: 0
+        isMultiColor: 1
+        blockName: Block
+        description: Just a block
+    - name: Empty
+      value:
+        sprite: {fileID: 4888904824014766370, guid: 94f09c5201636424d83282f90d15db66, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Empty
+        description: 
+    - name: LightEmpty
+      value:
+        sprite: {fileID: -1292502910517047332, guid: 4f143efeb36ed714daae387c421804df, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: LightEmpty
+        description: 
+    - name: Bedrock
+      value:
+        sprite: {fileID: -5559053554441606075, guid: 152bcf66b3c726d4bb43c4797a649140, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Bedrock
+        description: Indestructible block
+    - name: Coin
+      value:
+        sprite: {fileID: 5946765026924467435, guid: 196bd843be801db4fb292cfecd9205b5, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Coin Block
+        description: Get 5$ on clear
+    - name: ExtraEnergy
+      value:
+        sprite: {fileID: 5846656404858622847, guid: 39e6bf98a664f6c4b917954df05574c5, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Energy Block
+        description: Gain 2 energy on clear
+    - name: Poison
+      value:
+        sprite: {fileID: 0}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+    - name: Heal
+      value:
+        sprite: {fileID: -2593335709152498361, guid: 46ed8ab0e940ed24fa0146ff8297fb08, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Heal Kit
+        description: Heal 2 HP on clear
+    - name: TempEnergy
+      value:
+        sprite: {fileID: 2017152778444641178, guid: 79cfb96510ea78340a04ba5f6a619451, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: Get 5 energy if cleared in one turn
+    - name: TempHeal
+      value:
+        sprite: {fileID: 21300000, guid: 37d6639ed3c1bf74d88d2a6962ce87ae, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: Heal 5 HP if cleared in one turn.
+    - name: Ghost
+      value:
+        sprite: {fileID: -5021986908558603458, guid: 219fa2919fe09eb43b87889d8d71df39, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Ghost
+        description: Transparent, can go through blocks
+    - name: Sand
+      value:
+        sprite: {fileID: 762541095258871601, guid: e59ed6324f71b674dab9eeb7b19773b2, type: 3}
+        prior: -2
+        isMultiColor: 0
+        blockName: Sand
+        description: Falls down always
+    - name: Bomb
+      value:
+        sprite: {fileID: -8547288172268570901, guid: 0e29980659691cd4a875810b44570a75, type: 3}
+        prior: -5
+        isMultiColor: 0
+        blockName: Landmine
+        description: Explodes on clear
+    - name: Grass
+      value:
+        sprite: {fileID: 21300000, guid: b493304dd64c35c42ab4248a35cb3683, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Grass
+        description: idk grows left and right :3
+    - name: Bush
+      value:
+        sprite: {fileID: -7931673427691008612, guid: 7c84c521b20be0f42ad14f1f5219d64d, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: Spreads to adjacent cells on put
+    - name: Downloader
+      value:
+        sprite: {fileID: -967397861877009665, guid: 2fa5644396de61d49b8314e926db5d24, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Downloader
+        description: Fill all empty blocks below on place
+    - name: Mirror
+      value:
+        sprite: {fileID: 1801998517685286619, guid: 54dd6bc0dd42fda46a0f3ec0c4ffecdb, type: 3}
+        prior: 1
+        isMultiColor: 0
+        blockName: 
+        description: Position of block is mirrored on place
+    - name: Stone
+      value:
+        sprite: {fileID: 5864484810172346308, guid: 47bf8082d63e5ab4494a036e68af0e3f, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Stone
+        description: It is not destroyed after clear
+    - name: Metal
+      value:
+        sprite: {fileID: 2539648772085575199, guid: fd1de261f5d5f2c45b750a5a08c77c02, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Metal
+        description: It is not destroyed after clear or explotion
+    - name: Fire
+      value:
+        sprite: {fileID: -4539564651914429660, guid: 87c57afbd647d8646b6703f952f6d579, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Burning Block
+        description: Take 4 damage on clear
+    - name: Cursed
+      value:
+        sprite: {fileID: -5399546124798949365, guid: 25ce3554a1a029c4d9157c59d5e0af6b, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Cursed Block
+        description: Take 10 damage on clear
+    - name: TempFire
+      value:
+        sprite: {fileID: 0}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: Take 10 damage if cleared right after put
+    - name: Grenade
+      value:
+        sprite: {fileID: 5597802900057389312, guid: 2266a4adb2b67a34fb8d558115bcb8c3, type: 3}
+        prior: -5
+        isMultiColor: 0
+        blockName: Grenade
+        description: Explodes on put
+    - name: Laser
+      value:
+        sprite: {fileID: -8762105871356968234, guid: 7c7e527db34c8294184575ee3abe866f, type: 3}
+        prior: -5
+        isMultiColor: 0
+        blockName: Laser Target
+        description: Destroys all blocks below on put
+    - name: Cleared
+      value:
+        sprite: {fileID: -4831946984322222711, guid: f25e6d8f6a02d274dac9968ae865b18e, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+    - name: Exploded
+      value:
+        sprite: {fileID: -7678008005977438483, guid: bb6111bbbf2d57b4f925d49c6ae5dd34, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+    - name: Removed
+      value:
+        sprite: {fileID: -1397761423247680911, guid: 8e75fe2e383ad6d41980acb6162ce701, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+    - name: RemovedSpeical
+      value:
+        sprite: {fileID: -234762709590263368, guid: ba9f295a13f33f3448aa0e07616dba1a, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+    - name: Chained
+      value:
+        sprite: {fileID: -1584685057490639204, guid: 6df721bc12ae05349b2175896f8e6760, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Chained
+        description: This piece can't rotate
+    - name: Protector
+      value:
+        sprite: {fileID: 5878726735974372036, guid: 7c6ca89850b6fce47a6da037c073fcdc, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Protection Rune
+        description: While exists in glass, energy gain reduced by 90%
+    - name: Cleaner
+      value:
+        sprite: {fileID: -3406213849805613160, guid: ea8f93fd84a0c6e48b103306841a0421, type: 3}
+        prior: -10
+        isMultiColor: 0
+        blockName: Purifier
+        description: Changes adjacent blocks to default blocks in put
+    - name: Lock
+      value:
+        sprite: {fileID: 5079683901481405722, guid: d969f5ad554280846992bebc46d8e89c, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Lock
+        description: Lines with this block can't be cleared
+    - name: Key
+      value:
+        sprite: {fileID: -3151901118593352041, guid: 0c75dd18a69e94a4583cd6cf1c3ea470, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Key
+        description: Disables all 'Lock' blocks in the same line
+    - name: Miner
+      value:
+        sprite: {fileID: -8299018030958916511, guid: 66125cb98083f8c4fa003fa20ce546e2, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: Gives 1$ each turn
+    - name: SolarPanel
+      value:
+        sprite: {fileID: 7551643460035669581, guid: 3deed366bcbe499409fbe121b957d460, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: If no blocks above, gives 1 energy each turn
+    - name: TempBlock
+      value:
+        sprite: {fileID: -8802088135386146420, guid: 658056f8caf80f24589c4e943b444371, type: 3}
+        prior: 2
+        isMultiColor: 0
+        blockName: Temporary
+        description: Destroyed on place
+    - name: VirusBlock
+      value:
+        sprite: {fileID: 8193054883658866545, guid: aa1708671e6df4a4fb0acde38a7b5d0d, type: 3}
+        prior: -2
+        isMultiColor: 0
+        blockName: Virus
+        description: Spreads in closed areas always, will be destroyed in open area.
+    - name: SaveBlock
+      value:
+        sprite: {fileID: 8402961030513527064, guid: ce57cee78a78c0f4ebb7ccf04a583d3c, type: 3}
+        prior: 0
+        isMultiColor: 0
+        blockName: Save block
+        description: Gives 5 energy on hold
+    _orphaned:
+    - name: GlassPanel
+      value:
+        sprite: {fileID: 0}
+        prior: 0
+        isMultiColor: 0
+        blockName: 
+        description: 
+  sprites:
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 63c5a5720ccab9b4caeb55bd8bfa8640, type: 3}
+  - {fileID: 21300000, guid: aea7543c47351604f82cc40623cc540c, type: 3}
+  - {fileID: 21300000, guid: 993080d61da35954291bd3a13930987f, type: 3}
+  - {fileID: 21300000, guid: 18c16ed2aff6c424ea2c1801a02a11d5, type: 3}
+  - {fileID: 21300000, guid: f70ebf1c9fbf4c74489c3374eb27a1b3, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 0b00afb63d9ebde42bcf3aea3ff2c72d, type: 3}
+  - {fileID: 21300000, guid: d9e1299effc3809438f4c436d084bbce, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 993080d61da35954291bd3a13930987f, type: 3}
+  - {fileID: 21300000, guid: 18c16ed2aff6c424ea2c1801a02a11d5, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: 0b00afb63d9ebde42bcf3aea3ff2c72d, type: 3}
+  - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
+  - {fileID: 21300000, guid: d9e1299effc3809438f4c436d084bbce, type: 3}
+  prior: 
+  isMultiColor: 
+  blockName: []
+  description: []
+  colors:
+  - {r: 0.1764706, g: 0.91764706, b: 0.96862745, a: 1}
+  - {r: 1, g: 0, b: 0.7137255, a: 1}
+  - {r: 0.9411765, g: 0.9764706, b: 0.4509804, a: 1}
+  - {r: 0.56078434, g: 0.07450981, b: 0.99215686, a: 1}
+  - {r: 0.96862745, g: 0.5137255, b: 0.92941177, a: 1}
+  - {r: 0.7176471, g: 0.627451, b: 0.1764706, a: 1}
+  - {r: 0.07910103, g: 0.517, b: 0.48572153, a: 1}

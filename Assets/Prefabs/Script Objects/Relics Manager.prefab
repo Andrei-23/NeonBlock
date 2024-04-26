@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &850661267401024726
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3788470128963626612}
+  - component: {fileID: 7855880876728423146}
+  m_Layer: 0
+  m_Name: Relics Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3788470128963626612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850661267401024726}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3820351, y: 3.085395, z: 486.74878}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7855880876728423146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850661267401024726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bac637592df22c4db79601153b3f6b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  relicDataMap:
+    _map:
+    - name: Null
+      value:
+        sprite: {fileID: 0}
+        max_count: 0
+        name: NULL
+        description: NULL
+        show_value: 0
+    - name: LED
+      value:
+        sprite: {fileID: 21300000, guid: 8558c9b7f25230d42a140a99f6797cb8, type: 3}
+        max_count: -1
+        name: 
+        description: +5% energy
+        show_value: 0
+    - name: Battery
+      value:
+        sprite: {fileID: 21300000, guid: bde97c30d736aaf40ac842d0a2c99d81, type: 3}
+        max_count: -1
+        name: 
+        description: Heal 1 HP for each cleared line
+        show_value: 0
+    - name: Discount
+      value:
+        sprite: {fileID: 21300000, guid: 873068c0091c3354e8cd108616868677, type: 3}
+        max_count: -1
+        name: Promocode
+        description: Get 10% discount in the shop
+        show_value: 0
+    - name: Telescope
+      value:
+        sprite: {fileID: 21300000, guid: 8e12e18174f51984bbac391de1e5ef4a, type: 3}
+        max_count: 3
+        name: 
+        description: You can see one more piece in the queue
+        show_value: 0
+    - name: Trashcan
+      value:
+        sprite: {fileID: 21300000, guid: 7c768127175fc154a823969474279d4f, type: 3}
+        max_count: 1
+        name: 
+        description: If you place 5 pieces while holding one, it will be deleted
+        show_value: 1
+    - name: BatterySlot
+      value:
+        sprite: {fileID: 21300000, guid: 09d7f9bff84ed56419875d4975599b0c, type: 3}
+        max_count: 1
+        name: Battery Slot
+        description: +50% energy while holding piece, but you can't unhold piece
+        show_value: 0
+    - name: Resistor
+      value:
+        sprite: {fileID: 21300000, guid: 4af04c8bdf1503c498a951b6754e3c90, type: 3}
+        max_count: -1
+        name: 
+        description: -10% damage from overflow
+        show_value: 0
+    - name: Transistor
+      value:
+        sprite: {fileID: 21300000, guid: 54e9bb48ca6acdb4db08ddd1b1331955, type: 3}
+        max_count: -1
+        name: 
+        description: +10% energy after line clear
+        show_value: 0
+    - name: LaserModule
+      value:
+        sprite: {fileID: 21300000, guid: 567a0f52b47ac8c40a2905b763b8c81a, type: 3}
+        max_count: 1
+        name: Laser Module
+        description: On overflow lines will be removed above the laser instead of
+          the glass bottom
+        show_value: 0
+    - name: ExtraSpace
+      value:
+        sprite: {fileID: 1937585203025217053, guid: 0e5bae5ca408b13439865534adb598b7, type: 3}
+        max_count: 1
+        name: Area upgrade
+        description: Laser is 1 block higher
+        show_value: 0
+    - name: Drone
+      value:
+        sprite: {fileID: 21300000, guid: c21e999842bf4bf48b168d87de048e27, type: 3}
+        max_count: -1
+        name: Parachute
+        description: -10% fall speed
+        show_value: 0
+    - name: ExtraWeight
+      value:
+        sprite: {fileID: 21300000, guid: 2cc09a1c547e60b44a82735b36eae248, type: 3}
+        max_count: -1
+        name: Speed up
+        description: +15% energy, but +30% fall speed
+        show_value: 0
+    - name: Detonator
+      value:
+        sprite: {fileID: 21300000, guid: 3bd051543e330b44a93825f35a1dcbaa, type: 3}
+        max_count: -1
+        name: 
+        description: Gain 1 energy for each exploded block
+        show_value: 0
+    - name: ShockModule
+      value:
+        sprite: {fileID: 21300000, guid: f7a699c6594ce2747b7079f475f5c77f, type: 3}
+        max_count: 1
+        name: Shock Module
+        description: Gain 5 energy from each block, that caused explotion, but you
+          gain no energy from clearing lines
+        show_value: 0
+    - name: NetworkUpgrade
+      value:
+        sprite: {fileID: 21300000, guid: 74f83ea7c4bb0564198085c74cc8f87d, type: 3}
+        max_count: -1
+        name: Wi-Fi
+        description: +1% energy for each block in matrix
+        show_value: 0
+    - name: LaserRoulette
+      value:
+        sprite: {fileID: 21300000, guid: a0040052f2c33f1458ed0e4983e3bd42, type: 3}
+        max_count: 1
+        name: Height Upgrade
+        description: +10% energy for each block in the line under the laser
+        show_value: 0
+    - name: RecyclingProtocol
+      value:
+        sprite: {fileID: 21300000, guid: 0e5978ad950391b4d97228e239a87bb6, type: 3}
+        max_count: -1
+        name: Recycling Protocol
+        description: +1% energy for all empty blocks below the laser
+        show_value: 0
+    - name: CleanContract
+      value:
+        sprite: {fileID: 21300000, guid: 6eb87bdc0f9fefa45b593e8c31fba768, type: 3}
+        max_count: -1
+        name: Clean Contract
+        description: +100% clear energy if matrix is cleared
+        show_value: 0
+    - name: ComboUpgrade
+      value:
+        sprite: {fileID: 21300000, guid: 4ab03ac62ebdea544b4e31346eb7b43a, type: 3}
+        max_count: 1
+        name: combo module
+        description: Energy from combo clear is multiplyed by combo count
+        show_value: 0
+    - name: ParallelModule
+      value:
+        sprite: {fileID: 21300000, guid: 9165a1d150c8d0646842da7f23db3419, type: 3}
+        max_count: -1
+        name: Parallel module
+        description: +20% energy for clearing more than 1 line
+        show_value: 0
+    - name: OverchargeModule
+      value:
+        sprite: {fileID: 21300000, guid: 38854d73150ff054a90c520f1bd11f25, type: 3}
+        max_count: 1
+        name: Overcharger
+        description: Convert extra energy to $ after level
+        show_value: 0
+    - name: Timer
+      value:
+        sprite: {fileID: 21300000, guid: 0848eecc7b2669a44aa46f476921a777, type: 3}
+        max_count: -1
+        name: 
+        description: +1 turn before laser drop
+        show_value: 0
+    - name: DeathLaser
+      value:
+        sprite: {fileID: 21300000, guid: dcc1ff6b47ea9cc4c814dbbacd306ee0, type: 3}
+        max_count: 1
+        name: Death Laser
+        description: +2 laser height, +2 turns before laser drop, on overflow take
+          9999 damage
+        show_value: 0
+    _orphaned:
+    - name: ShockModule
+      value:
+        sprite: {fileID: 21300000, guid: f7a699c6594ce2747b7079f475f5c77f, type: 3}
+        max_count: 1
+        name: 
+        description: Gain 5 energy from each block, that caused explotion, but you
+          gain no energy from clearing lines
+        show_value: 0
+    - name: EmergencySupply
+      value:
+        sprite: {fileID: 0}
+        max_count: 1
+        name: Danger Module
+        description: +10% energy for each block in the line under the laser
+        show_value: 0
+  relicData: []
+  count: 0
