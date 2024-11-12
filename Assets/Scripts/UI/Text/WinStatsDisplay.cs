@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class WinStatsDisplay : MonoBehaviour
 {
     public TextMeshProUGUI totalEnergy;
-    public TextMeshProUGUI totalPixels;
+    //public TextMeshProUGUI totalPixels;
     public TextMeshProUGUI totalDamage;
     public TextMeshProUGUI totalPieces;
     public TextMeshProUGUI totalTurns;
@@ -19,7 +19,7 @@ public class WinStatsDisplay : MonoBehaviour
     private void Start()
     {
         totalEnergy.text = Stats.Instance.total_energy.ToString();
-        totalPixels.text = Stats.Instance.money.ToString();
+        //totalPixels.text = Stats.Instance.money.ToString();
         totalDamage.text = Stats.Instance.total_damage.ToString();
         totalPieces.text = Stats.Instance.piece_count.ToString();
         totalTurns.text = Stats.Instance.total_turns.ToString();

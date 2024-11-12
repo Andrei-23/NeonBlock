@@ -49,7 +49,7 @@ public class HintEventManager
     }
     public void SetRelic(Relic relic, GameObject obj)
     {
-        Debug.Log(relic.ToString());
+        //Debug.Log(relic.ToString());
         if (relic != currentRelic)
         {
             currentRelic = relic;
@@ -74,16 +74,27 @@ public class HintEventManager
 
     public void SetVisibility(bool is_visible)
     {
+        //Debug.Log("Visibility set to " + is_visible.ToString());
         showHint = is_visible;
         if(showHint == false)
         {
             SetDefaultState();
         }
     }
+    //public void UpdateVisibility()
+    //{
+    //    bool isGame = GameStateManager.Instance.CurrentGameState == GameState.Gameplay;
+    //    bool isPaused = GameStateManager.Instance.IsPaused;
+    //    SetVisibility(isPaused || !isGame);
+    //}
+
     private void ChangeHint(int state, GameObject obj)
     {
         // state: 0 - empty, 1 - block, 2 - relic
-        if(showHint)
+        //Debug.Log(state);
+        //Debug.Log(GameStateManager.Instance.CurrentGameState);
+        //Debug.Log(state.ToString() +  GameStateManager.Instance.IsPaused.ToString());
+        if (showHint)
         {
             OnHintChange?.Invoke(state, currentBlock, currentRelic, obj);
         }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Controller : MonoBehaviour
 {
     private Gameplay gameplay;
 
     //public float fall_delay = 0.8f;
-    private float push_down_delay = 0.125f; // fall speed
-    private float push_hrz_delay = 0.25f; // horizontal hold delay
+    private float push_down_delay = 0.1f; // fall speed
+    private float push_hrz_delay = 0.2f; // horizontal hold delay
     private float lock_delay = 0.5f; // delay before lock
 
     private float fall_timer = 0f;
@@ -33,19 +34,84 @@ public class Controller : MonoBehaviour
     private bool is_changed = false; // if true at the end of Update(), redraw glass
     private PieceManager pm => gameplay.pieceManager;
 
+    //bool leftPressed = false;
+    //bool rightPressed = false;
+    //bool softDropPressed = false;
+
+    //bool leftHeld = false;
+    //bool rightHeld = false;
+    //bool softDropHeld = false;
+
+    //bool holdPressed = false;
+
+    bool leftPressed;
+    bool rightPressed;
+    bool softDropPressed;
+    
+    bool leftHeld;
+    bool rightHeld;
+    bool softDropHeld;
+
+    bool rotateLeftPressed;
+    bool rotateRightPressed;
+    bool hardDropPressed;
+    bool holdPressed;
+
+    private PlayerInput _playerInput;
+
+    private InputAction _moveLeftAction;
+    private InputAction _moveRightAction;
+    private InputAction _softDropAction;
+    private InputAction _hardDropAction;
+    private InputAction _rotateLeftAction;
+    private InputAction _rotateRightAction;
+    private InputAction _holdAction;
+
     private void Awake()
     {
         gameplay = GetComponent<Gameplay>();
 
-        GameStateManager.Instance.OnGameStateChanged += OnGameStateChanged;
+        GameStateManager.Instance.OnPauseStateChanged += OnPauseStateChanged;
         PieceStateManager.Instance.OnPieceStateChanged += OnPieceStateChanged;
         PlayerStatEventManager.Instance.OnDeath += OnDeath;
+
+        _playerInput = gameObject.GetComponent<PlayerInput>();
+        SetupInputActions();
     }
+
     private void OnDestroy()
     {
-        GameStateManager.Instance.OnGameStateChanged -= OnGameStateChanged;
+        GameStateManager.Instance.OnPauseStateChanged -= OnPauseStateChanged;
         PieceStateManager.Instance.OnPieceStateChanged -= OnPieceStateChanged;
         PlayerStatEventManager.Instance.OnDeath -= OnDeath;
+    }
+
+    private void SetupInputActions()
+    {
+        _moveLeftAction = _playerInput.actions["Left"];
+        _moveRightAction = _playerInput.actions["Right"];
+        _softDropAction = _playerInput.actions["Soft Drop"];
+        _hardDropAction = _playerInput.actions["Hard Drop"];
+        _rotateLeftAction = _playerInput.actions["Rotate Left"];
+        _rotateRightAction = _playerInput.actions["Rotate Right"];
+        _holdAction = _playerInput.actions["Hold"];
+    }
+    private void UpdateInputs()
+    {
+        leftPressed = _moveLeftAction.WasPressedThisFrame();
+        rightPressed = _moveRightAction.WasPressedThisFrame();
+        softDropPressed = _softDropAction.WasPressedThisFrame();
+        hardDropPressed = _hardDropAction.WasPressedThisFrame();
+        rotateLeftPressed = _rotateLeftAction.WasPressedThisFrame();
+        rotateRightPressed = _rotateRightAction.WasPressedThisFrame();
+        holdPressed = _holdAction.WasPressedThisFrame();
+
+        leftHeld = _moveLeftAction.IsPressed();
+        rightHeld = _moveRightAction.IsPressed();
+        softDropHeld = _softDropAction.IsPressed();
+
+        //Debug.Log(leftPressed);
+        //Debug.Log(leftHeld);
     }
 
     private void Start()
@@ -62,24 +128,18 @@ public class Controller : MonoBehaviour
             return;
         }
 
-        bool clickHold = Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift) || Input.GetKeyDown(KeyCode.C);
-
-        bool clickDown = Input.GetKeyDown(KeyCode.DownArrow);
-        bool clickLeft = Input.GetKeyDown(KeyCode.LeftArrow);
-        bool clickRight = Input.GetKeyDown(KeyCode.RightArrow);
-        bool pushDown = Input.GetKey(KeyCode.DownArrow);
-        bool pushLeft = Input.GetKey(KeyCode.LeftArrow);
-        bool pushRight = Input.GetKey(KeyCode.RightArrow);
+        UpdateInputs();
 
         is_changed = false;
 
-        if(pushLeft && pushRight)
+
+        if(leftHeld && rightHeld)
         {
-            pushLeft = pushRight = false;
+            leftHeld = rightHeld = false;
         }
 
         // Hold piece
-        if(clickHold)
+        if(holdPressed)
         {
             if (gameplay.pieceManager.HoldPiece())
             {
@@ -88,7 +148,7 @@ public class Controller : MonoBehaviour
         }
 
         // Horizontal movement
-        if (clickLeft || (pushLeft && push_hrz_timer >= push_hrz_delay))
+        if (leftPressed || (leftHeld && push_hrz_timer >= push_hrz_delay))
         {
             push_hrz_timer = 0f;
             if (pm.TryMove(-1, 0))
@@ -96,7 +156,7 @@ public class Controller : MonoBehaviour
                 OnPieceMoved();
             }
         }
-        if (clickRight || (pushRight && push_hrz_timer >= push_hrz_delay))
+        if (rightPressed || (rightHeld && push_hrz_timer >= push_hrz_delay))
         {
             push_hrz_timer = 0f;
             if(pm.TryMove(1, 0))
@@ -106,14 +166,14 @@ public class Controller : MonoBehaviour
         }
 
         // Rotation
-        if (Input.GetKeyDown(KeyCode.Z)) // counterclockwise
+        if (rotateLeftPressed) // counterclockwise
         {
             if (pm.TryRotateLeft())
             {
                 OnPieceRotate();
             }
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (rotateRightPressed)
         {
             if (pm.TryRotateRight())
             {
@@ -121,7 +181,7 @@ public class Controller : MonoBehaviour
             }
         }
         // Hard Drop
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (hardDropPressed)
         {
             pm.Drop();
             OnPieceLock();
@@ -141,7 +201,7 @@ public class Controller : MonoBehaviour
         // Move down / fall (don't lock pieces here)
         else
         {
-            if (clickDown || (pushDown && push_down_timer >= push_down_delay))
+            if (softDropPressed || (softDropHeld && push_down_timer >= push_down_delay))
             {
                 push_down_timer = 0f;
                 fall_timer = 0f;
@@ -186,7 +246,7 @@ public class Controller : MonoBehaviour
 
     private void OnPieceLock()
     {
-        AudioManager.Instance.PlaySound(AudioManager.Instance.piecePlace);
+        AudioManager.Instance.PlaySound(SoundClip.piecePlace);
         //SoundManager.Instance.lockSound.Play();
         OnPieceReset();
     }
@@ -210,7 +270,7 @@ public class Controller : MonoBehaviour
 
     private void OnPieceRotate()
     {
-        AudioManager.Instance.PlaySound(AudioManager.Instance.pieceRotate);
+        AudioManager.Instance.PlaySound(SoundClip.pieceRotate);
         //SoundManager.Instance.rotateSound.Play();
         UpdateLockCount();
         is_changed = true;
@@ -220,7 +280,7 @@ public class Controller : MonoBehaviour
     {
         if (playSound)
         {
-            AudioManager.Instance.PlaySound(AudioManager.Instance.pieceMove);
+            AudioManager.Instance.PlaySound(SoundClip.pieceMove);
         }
         UpdateLockCount();
         is_changed = true;
@@ -241,11 +301,13 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void OnGameStateChanged(GameState newGameState)
+    private void OnPauseStateChanged(bool is_paused)
     {
-        is_paused = newGameState == GameState.Paused;
+        this.is_paused = is_paused;
         enabled = !is_paused && !is_piece_frozen && !is_dead;
     }
+
+
     private void OnPieceStateChanged(PieceState newPieceState)
     {
         is_piece_frozen = newPieceState == PieceState.Animation;
@@ -256,4 +318,5 @@ public class Controller : MonoBehaviour
         is_dead = true;
         enabled = false;
     }
+
 }

@@ -292,4 +292,8 @@ public class Block : ICloneable
         }
     }
 
+    public Color GetColor()
+    {
+        return BlockDataManager.Instance.colors[color];
+    }
 }

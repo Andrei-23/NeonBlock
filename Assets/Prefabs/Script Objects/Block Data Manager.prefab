@@ -46,15 +46,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 8839277711457316722, guid: 1e161006f4eef50439c7af60ef16c8a7, type: 3}
   DefaultSprite: {fileID: 4888904824014766370, guid: 94f09c5201636424d83282f90d15db66, type: 3}
+  KeyWords:
+  - key: on clear
+    changedKey: <color=#F0F973>on clear</color>
+  - key: on place
+    changedKey: <color=#7EE8FB>on place</color>
+  - key: each turn
+    changedKey: <color=#70FFAB>each turn</color>
+  - key: always
+    changedKey: <color=#FF4CC0>always</color>
+  - key: Always
+    changedKey: <color=#FF4CC0>Always</color>
+  - key: at the end of the turn
+    changedKey: <color=#FE8AA7>at the end of the turn</color>
+  - key: on hold
+    changedKey: <color=#8F13FD>on hold</color>
+  - key: on explode
+    changedKey: <color=#909090>on explode</color>
+  KeyWordsRus:
+  - key: "\u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
+    changedKey: "<color=#F0F973>\u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435</color>"
+  - key: "\u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
+    changedKey: "<color=#7EE8FB>\u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435</color>"
+  - key: "\u043A\u0430\u0436\u0434\u044B\u0439 \u0445\u043E\u0434"
+    changedKey: "<color=#70FFAB>\u043A\u0430\u0436\u0434\u044B\u0439 \u0445\u043E\u0434</color>"
+  - key: "\u0432\u0441\u0435\u0433\u0434\u0430"
+    changedKey: "<color=#FF4CC0>\u0432\u0441\u0435\u0433\u0434\u0430</color>"
+  - key: "\u0412\u0441\u0435\u0433\u0434\u0430"
+    changedKey: "<color=#FF4CC0>\u0412\u0441\u0435\u0433\u0434\u0430</color>"
+  - key: "\u0432 \u043A\u043E\u043D\u0446\u0435 \u0445\u043E\u0434\u0430"
+    changedKey: "<color=#FE8AA7>\u0432 \u043A\u043E\u043D\u0446\u0435 \u0445\u043E\u0434\u0430</color>"
+  - key: "\u043F\u0440\u0438 \u0443\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0438"
+    changedKey: "<color=#8F13FD>\u043F\u0440\u0438 \u0443\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0438</color>"
+  - key: "\u043F\u0440\u0438 \u0432\u0437\u0440\u044B\u0432\u0435"
+    changedKey: "<color=#909090>\u043F\u0440\u0438 \u0432\u0437\u0440\u044B\u0432\u0435</color>"
   TypeDataMap:
     _map:
     - name: Default
       value:
-        sprite: {fileID: 490004995802724989, guid: 46883aecfa556c14e842b2e79a4c9cc6, type: 3}
+        sprite: {fileID: -8180557571399206212, guid: e374aa6561b0ad2429cea4970cd1fe14, type: 3}
         prior: 0
         isMultiColor: 1
         blockName: Block
         description: Just a block
+        blockNameRUS: "\u0411\u043B\u043E\u043A"
+        descriptionRUS: "\u041F\u0440\u043E\u0441\u0442\u043E \u0431\u043B\u043E\u043A"
     - name: Empty
       value:
         sprite: {fileID: 4888904824014766370, guid: 94f09c5201636424d83282f90d15db66, type: 3}
@@ -62,6 +98,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Empty
         description: 
+        blockNameRUS: "\u041F\u0443\u0441\u0442\u0430\u044F \u043A\u043B\u0435\u0442\u043A\u0430"
+        descriptionRUS: 
     - name: LightEmpty
       value:
         sprite: {fileID: -1292502910517047332, guid: 4f143efeb36ed714daae387c421804df, type: 3}
@@ -69,13 +107,18 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: LightEmpty
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Bedrock
       value:
         sprite: {fileID: -5559053554441606075, guid: 152bcf66b3c726d4bb43c4797a649140, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: Bedrock
-        description: Indestructible block
+        blockName: Titan block
+        description: Fixed block
+        blockNameRUS: "\u0422\u0438\u0442\u0430\u043D\u043E\u0432\u044B\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u0424\u0438\u043A\u0441\u0438\u0440\u043E\u0432\u0430\u043D\u043D\u044B\u0439
+          \u0431\u043B\u043E\u043A"
     - name: Coin
       value:
         sprite: {fileID: 5946765026924467435, guid: 196bd843be801db4fb292cfecd9205b5, type: 3}
@@ -83,6 +126,9 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Coin Block
         description: Get 5$ on clear
+        blockNameRUS: "\u041C\u043E\u043D\u0435\u0442\u0430"
+        descriptionRUS: "\u041F\u043E\u043B\u0443\u0447\u0438 5$ \u043F\u0440\u0438
+          \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: ExtraEnergy
       value:
         sprite: {fileID: 5846656404858622847, guid: 39e6bf98a664f6c4b917954df05574c5, type: 3}
@@ -90,6 +136,9 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Energy Block
         description: Gain 2 energy on clear
+        blockNameRUS: "\u0411\u043B\u043E\u043A \u044D\u043D\u0435\u0440\u0433\u0438\u0438"
+        descriptionRUS: "\u041F\u043E\u043B\u0443\u0447\u0438 2 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: Poison
       value:
         sprite: {fileID: 0}
@@ -97,6 +146,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Heal
       value:
         sprite: {fileID: -2593335709152498361, guid: 46ed8ab0e940ed24fa0146ff8297fb08, type: 3}
@@ -104,55 +155,82 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Heal Kit
         description: Heal 2 HP on clear
+        blockNameRUS: "\u0410\u043F\u0442\u0435\u0447\u043A\u0430"
+        descriptionRUS: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438
+          2 HP \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: TempEnergy
       value:
         sprite: {fileID: 2017152778444641178, guid: 79cfb96510ea78340a04ba5f6a619451, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: 
-        description: Get 5 energy if cleared in one turn
+        blockName: Temporary Energy
+        description: Gain 10 energy on clear, turns into default block at the end
+          of the turn
+        blockNameRUS: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u0430\u044F \u044D\u043D\u0435\u0440\u0433\u0438\u044F"
+        descriptionRUS: "\u041F\u043E\u043B\u0443\u0447\u0438 10 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435, \u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u0441\u044F
+          \u043E\u0431\u044B\u0447\u043D\u044B\u043C \u0431\u043B\u043E\u043A\u043E\u043C
+          \u0432 \u043A\u043E\u043D\u0446\u0435 \u043A\u043E\u0434\u0430"
     - name: TempHeal
       value:
-        sprite: {fileID: 21300000, guid: 37d6639ed3c1bf74d88d2a6962ce87ae, type: 3}
+        sprite: {fileID: 0}
         prior: 0
         isMultiColor: 0
         blockName: 
-        description: Heal 5 HP if cleared in one turn.
+        description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Ghost
       value:
-        sprite: {fileID: -5021986908558603458, guid: 219fa2919fe09eb43b87889d8d71df39, type: 3}
+        sprite: {fileID: 21300000, guid: 8eea9bb769680d2419b5ed07808471e1, type: 3}
         prior: 0
         isMultiColor: 0
         blockName: Ghost
         description: Transparent, can go through blocks
+        blockNameRUS: "\u041F\u0440\u0438\u0437\u0440\u0430\u043A"
+        descriptionRUS: "\u041F\u0440\u043E\u0437\u0440\u0430\u0447\u043D\u044B\u0439,
+          \u043F\u0440\u043E\u0445\u043E\u0434\u0438\u0442 \u0441\u043A\u0432\u043E\u0437\u044C
+          \u0431\u043B\u043E\u043A\u0438"
     - name: Sand
       value:
         sprite: {fileID: 762541095258871601, guid: e59ed6324f71b674dab9eeb7b19773b2, type: 3}
         prior: -2
         isMultiColor: 0
         blockName: Sand
-        description: Falls down always
+        description: Always falls down
+        blockNameRUS: "\u041F\u0435\u0441\u043E\u043A"
+        descriptionRUS: "\u0412\u0441\u0435\u0433\u0434\u0430 \u043F\u0430\u0434\u0430\u0435\u0442
+          \u0432\u043D\u0438\u0437"
     - name: Bomb
       value:
         sprite: {fileID: -8547288172268570901, guid: 0e29980659691cd4a875810b44570a75, type: 3}
         prior: -5
         isMultiColor: 0
         blockName: Landmine
-        description: Explodes on clear
+        description: Explodes in 3x3 area on clear
+        blockNameRUS: "\u041C\u0438\u043D\u0430"
+        descriptionRUS: "\u0412\u0437\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F
+          \u0432 \u043F\u043B\u043E\u0449\u0430\u0434\u0438 3\u04453 \u043F\u0440\u0438
+          \u043E\u0447\u0438\u0441\u0442\u043A\u0435 \u0438 \u043F\u0440\u0438 \u0432\u0437\u0440\u044B\u0432\u0435"
     - name: Grass
       value:
-        sprite: {fileID: 21300000, guid: b493304dd64c35c42ab4248a35cb3683, type: 3}
+        sprite: {fileID: 0}
         prior: 0
         isMultiColor: 0
-        blockName: Grass
-        description: idk grows left and right :3
+        blockName: 
+        description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Bush
       value:
         sprite: {fileID: -7931673427691008612, guid: 7c84c521b20be0f42ad14f1f5219d64d, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: 
-        description: Spreads to adjacent cells on put
+        blockName: Bush
+        description: Spreads to adjacent cells on place
+        blockNameRUS: "\u041A\u0443\u0441\u0442"
+        descriptionRUS: "\u0417\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442 \u0441\u043E\u0441\u0435\u0434\u043D\u0438\u0435
+          \u043A\u043B\u0435\u0442\u043A\u0438 \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Downloader
       value:
         sprite: {fileID: -967397861877009665, guid: 2fa5644396de61d49b8314e926db5d24, type: 3}
@@ -160,27 +238,43 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Downloader
         description: Fill all empty blocks below on place
+        blockNameRUS: "\u0417\u0430\u0433\u0440\u0443\u0437\u0447\u0438\u043A"
+        descriptionRUS: "\u0417\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442 \u0432\u0441\u0435
+          \u043F\u0443\u0441\u0442\u044B\u0435 \u043A\u043B\u0435\u0442\u043A\u0438
+          \u043F\u043E\u0434 \u0441\u043E\u0431\u043E\u0439 \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Mirror
       value:
         sprite: {fileID: 1801998517685286619, guid: 54dd6bc0dd42fda46a0f3ec0c4ffecdb, type: 3}
         prior: 1
         isMultiColor: 0
-        blockName: 
-        description: Position of block is mirrored on place
+        blockName: Mirror
+        description: The block is duplicated and mirrored on place
+        blockNameRUS: "\u0417\u0435\u0440\u043A\u0430\u043B\u043E"
+        descriptionRUS: "\u0420\u0430\u0441\u043F\u043E\u043B\u043E\u0436\u0435\u043D\u0438\u0435
+          \u0431\u043B\u043E\u043A\u0430 \u0437\u0435\u0440\u043A\u0430\u043B\u044C\u043D\u043E
+          \u0434\u0443\u0431\u043B\u0438\u0440\u0443\u0435\u0442\u0441\u044F \u043F\u0440\u0438
+          \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Stone
       value:
         sprite: {fileID: 5864484810172346308, guid: 47bf8082d63e5ab4494a036e68af0e3f, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: Stone
+        blockName: Stone block
         description: It is not destroyed after clear
+        blockNameRUS: "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u041D\u0435 \u0443\u0434\u0430\u043B\u044F\u0435\u0442\u0441\u044F
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: Metal
       value:
         sprite: {fileID: 2539648772085575199, guid: fd1de261f5d5f2c45b750a5a08c77c02, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: Metal
-        description: It is not destroyed after clear or explotion
+        blockName: Steel block
+        description: It is not destroyed on clear / on explotion
+        blockNameRUS: "\u0421\u0442\u0430\u043B\u044C\u043D\u043E\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u041D\u0435 \u0443\u0434\u0430\u043B\u044F\u0435\u0442\u0441\u044F
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435 \u0438\u043B\u0438
+          \u043F\u0440\u0438 \u0432\u0437\u0440\u044B\u0432\u0435"
     - name: Fire
       value:
         sprite: {fileID: -4539564651914429660, guid: 87c57afbd647d8646b6703f952f6d579, type: 3}
@@ -188,6 +282,9 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Burning Block
         description: Take 4 damage on clear
+        blockNameRUS: "\u0413\u043E\u0440\u044F\u0449\u0438\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 4 \u0443\u0440\u043E\u043D\u0430
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: Cursed
       value:
         sprite: {fileID: -5399546124798949365, guid: 25ce3554a1a029c4d9157c59d5e0af6b, type: 3}
@@ -195,27 +292,40 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Cursed Block
         description: Take 10 damage on clear
+        blockNameRUS: "\u041F\u0440\u043E\u043A\u043B\u044F\u0442\u044B\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u041D\u0430\u043D\u043E\u0441\u0438\u0442 10 \u0443\u0440\u043E\u043D\u0430
+          \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
     - name: TempFire
       value:
         sprite: {fileID: 0}
         prior: 0
         isMultiColor: 0
         blockName: 
-        description: Take 10 damage if cleared right after put
+        description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Grenade
       value:
         sprite: {fileID: 5597802900057389312, guid: 2266a4adb2b67a34fb8d558115bcb8c3, type: 3}
         prior: -5
         isMultiColor: 0
         blockName: Grenade
-        description: Explodes on put
+        description: Explodes in 3x3 area on place
+        blockNameRUS: "\u0413\u0440\u0430\u043D\u0430\u0442\u0430"
+        descriptionRUS: "\u0412\u0437\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F
+          \u0432 \u043F\u043B\u043E\u0449\u0430\u0434\u0438 3\u04453 \u043F\u0440\u0438
+          \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Laser
       value:
         sprite: {fileID: -8762105871356968234, guid: 7c7e527db34c8294184575ee3abe866f, type: 3}
         prior: -5
         isMultiColor: 0
         blockName: Laser Target
-        description: Destroys all blocks below on put
+        description: Explodes all blocks below on place
+        blockNameRUS: "\u041B\u0430\u0437\u0435\u0440\u043D\u0430\u044F \u043C\u0435\u0442\u043A\u0430"
+        descriptionRUS: "\u0412\u0437\u0440\u044B\u0432\u0430\u0435\u0442 \u0432\u0441\u0435
+          \u0431\u043B\u043E\u043A\u0438 \u043F\u043E\u0434 \u0441\u043E\u0431\u043E\u0439
+          \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Cleared
       value:
         sprite: {fileID: -4831946984322222711, guid: f25e6d8f6a02d274dac9968ae865b18e, type: 3}
@@ -223,6 +333,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Exploded
       value:
         sprite: {fileID: -7678008005977438483, guid: bb6111bbbf2d57b4f925d49c6ae5dd34, type: 3}
@@ -230,6 +342,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Removed
       value:
         sprite: {fileID: -1397761423247680911, guid: 8e75fe2e383ad6d41980acb6162ce701, type: 3}
@@ -237,6 +351,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: RemovedSpeical
       value:
         sprite: {fileID: -234762709590263368, guid: ba9f295a13f33f3448aa0e07616dba1a, type: 3}
@@ -244,27 +360,42 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
     - name: Chained
       value:
         sprite: {fileID: -1584685057490639204, guid: 6df721bc12ae05349b2175896f8e6760, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: Chained
-        description: This piece can't rotate
+        blockName: Chained block
+        description: You can't rotate piece with this block
+        blockNameRUS: "\u0421\u043A\u043E\u0432\u0430\u043D\u043D\u044B\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u0424\u0438\u0433\u0443\u0440\u0443 \u0441 \u044D\u0442\u0438\u043C
+          \u0431\u043B\u043E\u043A\u043E\u043C \u043D\u0435\u043B\u044C\u0437\u044F
+          \u0432\u0440\u0430\u0449\u0430\u0442\u044C"
     - name: Protector
       value:
         sprite: {fileID: 5878726735974372036, guid: 7c6ca89850b6fce47a6da037c073fcdc, type: 3}
         prior: 0
         isMultiColor: 0
         blockName: Protection Rune
-        description: While exists in glass, energy gain reduced by 90%
+        description: While this block is in glass, line energy is equal to 1
+        blockNameRUS: "\u0420\u0443\u043D\u0430 \u0437\u0430\u0449\u0438\u0442\u044B"
+        descriptionRUS: "\u041F\u043E\u043A\u0430 \u044D\u0442\u043E\u0442 \u0431\u043B\u043E\u043A
+          \u0435\u0441\u0442\u044C \u0432 \u0441\u0442\u0430\u043A\u0430\u043D\u0435,
+          \u044D\u043D\u0435\u0440\u0433\u0438\u044F \u0437\u0430 \u043B\u0438\u043D\u0438\u044E
+          \u0440\u0430\u0432\u043D\u0430 1"
     - name: Cleaner
       value:
         sprite: {fileID: -3406213849805613160, guid: ea8f93fd84a0c6e48b103306841a0421, type: 3}
         prior: -10
         isMultiColor: 0
         blockName: Purifier
-        description: Changes adjacent blocks to default blocks on put
+        description: Changes the blocks around to default blocks on place
+        blockNameRUS: "\u041E\u0447\u0438\u0441\u0442\u0438\u0442\u0435\u043B\u044C"
+        descriptionRUS: "\u0417\u0430\u043C\u0435\u043D\u044F\u0435\u0442 \u0431\u043B\u043E\u043A\u0438
+          \u0432\u043E\u043A\u0440\u0443\u0433 \u043D\u0430 \u043E\u0431\u044B\u0447\u043D\u044B\u0435
+          \u043F\u0440\u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0435"
     - name: Lock
       value:
         sprite: {fileID: 5079683901481405722, guid: d969f5ad554280846992bebc46d8e89c, type: 3}
@@ -272,48 +403,75 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: Lock
         description: Lines with this block can't be cleared
+        blockNameRUS: "\u0417\u0430\u043C\u043E\u043A"
+        descriptionRUS: "\u041B\u0438\u043D\u0438\u0438 \u0441 \u044D\u0442\u0438\u043C
+          \u0431\u043B\u043E\u043A\u043E\u043C \u043D\u0435 \u043E\u0447\u0438\u0449\u0430\u044E\u0442\u0441\u044F"
     - name: Key
       value:
         sprite: {fileID: -3151901118593352041, guid: 0c75dd18a69e94a4583cd6cf1c3ea470, type: 3}
         prior: 0
         isMultiColor: 0
         blockName: Key
-        description: Disables all 'Lock' blocks in the same line
+        description: Disables effect of locks in the line
+        blockNameRUS: "\u041A\u043B\u044E\u0447"
+        descriptionRUS: "\u041E\u0442\u043C\u0435\u043D\u044F\u0435\u0442 \u044D\u0444\u0444\u0435\u043A\u0442
+          \u0437\u0430\u043C\u043A\u0430 \u0432 \u0441\u0432\u043E\u0435\u0439 \u043B\u0438\u043D\u0438\u0438"
     - name: Miner
       value:
         sprite: {fileID: -8299018030958916511, guid: 66125cb98083f8c4fa003fa20ce546e2, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: 
+        blockName: Miner
         description: Gives 1$ each turn
+        blockNameRUS: "\u041C\u0430\u0439\u043D\u0435\u0440"
+        descriptionRUS: "\u041F\u043E\u043B\u0443\u0447\u0438 1$ \u043A\u0430\u0436\u0434\u044B\u0439
+          \u0445\u043E\u0434"
     - name: SolarPanel
       value:
         sprite: {fileID: 7551643460035669581, guid: 3deed366bcbe499409fbe121b957d460, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: 
+        blockName: Solar Panel
         description: If no blocks above, gives 1 energy each turn
+        blockNameRUS: "\u0421\u043E\u043B\u043D\u0435\u0447\u043D\u0430\u044F \u043F\u0430\u043D\u0435\u043B\u044C"
+        descriptionRUS: "\u0415\u0441\u043B\u0438 \u0441\u0432\u0435\u0440\u0445\u0443
+          \u043D\u0435\u0442 \u0431\u043B\u043E\u043A\u043E\u0432, \u043F\u043E\u043B\u0443\u0447\u0438
+          1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438 \u043A\u0430\u0436\u0434\u044B\u0439
+          \u0445\u043E\u0434"
     - name: TempBlock
       value:
         sprite: {fileID: -8802088135386146420, guid: 658056f8caf80f24589c4e943b444371, type: 3}
         prior: 2
         isMultiColor: 0
-        blockName: Temporary
-        description: Destroyed on place
+        blockName: Temporary Block
+        description: Destroyed at the end of the turn
+        blockNameRUS: "\u0412\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0439 \u0431\u043B\u043E\u043A"
+        descriptionRUS: "\u0418\u0441\u0447\u0435\u0437\u0430\u0435\u0442 \u0432
+          \u043A\u043E\u043D\u0446\u0435 \u0445\u043E\u0434\u0430"
     - name: VirusBlock
       value:
         sprite: {fileID: 8193054883658866545, guid: aa1708671e6df4a4fb0acde38a7b5d0d, type: 3}
         prior: -2
         isMultiColor: 0
         blockName: Virus
-        description: Spreads in closed areas always, will be destroyed in open area.
+        description: Always spreads and fills closed areas, will be destroyed in
+          open area.
+        blockNameRUS: "\u0412\u0438\u0440\u0443\u0441"
+        descriptionRUS: "\u0412\u0441\u0435\u0433\u0434\u0430 \u0440\u0430\u0441\u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u044F\u0435\u0442\u0441\u044F
+          \u0438 \u0437\u0430\u043F\u043E\u043B\u043D\u044F\u0435\u0442 \u0437\u0430\u043C\u043A\u043D\u0443\u0442\u044B\u0435
+          \u043F\u0443\u0441\u0442\u044B\u0435 \u043E\u0431\u043B\u0430\u0441\u0442\u0438,
+          \u0432 \u043E\u0442\u043A\u0440\u044B\u043E\u043C \u043F\u0440\u043E\u0441\u0442\u0440\u0430\u043D\u0441\u0442\u0432\u0435
+          \u0438\u0441\u0447\u0435\u0437\u0430\u0435\u0442"
     - name: SaveBlock
       value:
         sprite: {fileID: 8402961030513527064, guid: ce57cee78a78c0f4ebb7ccf04a583d3c, type: 3}
         prior: 0
         isMultiColor: 0
-        blockName: Save block
-        description: Gives 5 energy on hold
+        blockName: Save Block
+        description: Gain 5 energy on hold
+        blockNameRUS: "\u0411\u043B\u043E\u043A \u0421\u043E\u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"
+        descriptionRUS: "\u041F\u043E\u043B\u0443\u0447\u0438 5 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u043F\u0440\u0438 \u0443\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u0438"
     _orphaned:
     - name: GlassPanel
       value:
@@ -322,6 +480,8 @@ MonoBehaviour:
         isMultiColor: 0
         blockName: 
         description: 
+        blockNameRUS: 
+        descriptionRUS: 
   sprites:
   - {fileID: 21300000, guid: 4c009f5965ad4f343a0ff275e69da214, type: 3}
   - {fileID: 21300000, guid: 63c5a5720ccab9b4caeb55bd8bfa8640, type: 3}
@@ -343,8 +503,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d9e1299effc3809438f4c436d084bbce, type: 3}
   prior: 
   isMultiColor: 
-  blockName: []
-  description: []
   colors:
   - {r: 0.1764706, g: 0.91764706, b: 0.96862745, a: 1}
   - {r: 1, g: 0, b: 0.7137255, a: 1}

@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
+
+using Relic = RelicsManager.RelicType;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -52,8 +54,7 @@ public class InteractionManager : MonoBehaviour
         blockSortList = new List<BlockCompareStruct>();
         gameplay = GetComponent<Gameplay>();
 
-        Stats.Instance.energy = 0;
-        Stats.Instance.turn_cnt = 0;
+        Stats.Instance.ResetLevelStats();
     }
     private void OnDestroy()
     {
@@ -83,17 +84,22 @@ public class InteractionManager : MonoBehaviour
         // Update glass
         if (UpdateGlass()) yield return StartCoroutine(waiter());
 
+        bool noClears = true;
         // try to clear lines then update
-        int combo = 0;
         while (!enoughEnergy)
         {
-            // Clear lines
+            // Find and clear lines, stop if no lines found
+            // Update combo
             clear_lines_cnt = 0;
             TryClearLines();
+            if (clear_lines_cnt == 0) break;
+            noClears = false;
+
+            // SFX
             if (stop_flag)
             {
                 // Play line clear sound
-                AudioManager.Instance.PlayClearSound(combo);
+                AudioManager.Instance.PlayClearSound(Stats.Instance.combo);
 
                 yield return StartCoroutine(waiter(0.3f));
             }
@@ -101,29 +107,34 @@ public class InteractionManager : MonoBehaviour
             {
                 RelicEvents.Instance.ClearLine();
             }
-            if (clear_lines_cnt == 0) break;
+
+            // Relics
+            if (RM.IsActive(Relic.Square) && clear_lines_cnt == 4)
+            {
+                //int x = RM.IsActive(Relic.Geometry) ? 2 : 1;
+                RM.IncreaseValue(Relic.Square, 1);
+            }
+            if (RM.IsActive(Relic.Triangle) && clear_lines_cnt == 3)
+            {
+                GainEnergy(RM.GetValue(Relic.Triangle) * 3);
+            }
 
             // Energy
-            float m1 = RM.IsActive(RelicsManager.RelicType.ComboUpgrade) ? (combo + 1) : 1;
-            float m2 = (clear_lines_cnt > 1 && RM.IsActive(RelicsManager.RelicType.ParallelModule))
-                ? RM.GetCount(RelicsManager.RelicType.ParallelModule) * 1.2f : 1f;
-            int val = clear_lines_cnt * 15 - 5;
-            GainEnergyFromLine(val * m1 * m2);
+            float val = Stats.Instance.combo * clear_lines_cnt * GetLineCost();
+            GainEnergy(val);
 
             // Delay after explotions/ deleting lines
             if (UpdateClearedBlocks()) yield return StartCoroutine(waiter(0.2f));
 
             // Update glass
             if (UpdateGlass()) yield return StartCoroutine(waiter());
-            combo++;
         }
 
-
-        // Poison attack (not affected by mult)
-        //if (!enoughEnergy)
-        //{
-        //    PlayerStatEventManager.Instance.PoisonDamageEnemy();
-        //}
+        // Reset combo if no clears
+        if (noClears && !RM.IsActive(Relic.Fuse))
+        {
+            PlayerStatEventManager.Instance.ResetCombo();
+        }
 
         // Before next turn
         if (EndActivate()) yield return StartCoroutine(waiter());
@@ -150,8 +161,8 @@ public class InteractionManager : MonoBehaviour
         if (CheckDamageLine())
         {
             // Play delete sound
-            AudioManager.Instance.PlaySound(AudioManager.Instance.lineDelete);
-
+            AudioManager.Instance.PlaySound(SoundClip.lineDamage);
+            CameraShake.Instance.ShakeCamera(0.3f, 0.3f);
             yield return StartCoroutine(waiter());
             UpdateClearedBlocks();
             yield return StartCoroutine(waiter());
@@ -169,71 +180,80 @@ public class InteractionManager : MonoBehaviour
 
         gameplay.drawGlass.Draw();
     }
+    
 
+    /// <summary>
+    /// Returns actual line cost
+    /// </summary>
+    /// <returns></returns>
+    public int GetLineCost()
+    {
+        int cost = Stats.Instance.GetDefaultlineCost(true);
+
+        // matrix-relied relics
+        {
+            int block_count = 0;
+            int empty_count = 0;
+            int under_laser_cnt = 0;
+
+            for (int y = 0; y < glass_h; y++)
+            {
+                for (int x = 0; x < glass_w; x++)
+                {
+                    if (glass[y][x].type == Block.Type.Empty && y < gameplay.level.laser) empty_count++;
+                    if (glass[y][x].type != Block.Type.Empty) block_count++;
+                }
+            }
+            for (int x = 0; x < glass_w; x++)
+            {
+                if (!glass[gameplay.level.laser - 1][x].IsEmpty()) under_laser_cnt++;
+            }
+
+            cost += (block_count / 10) * RM.GetCount(Relic.NetworkUpgrade);
+            cost += (empty_count / 20) * RM.GetCount(Relic.RecyclingProtocol);
+            cost += under_laser_cnt * RM.GetCount(Relic.LaserRoulette);
+        }
+        if (RM.IsActive(Relic.BatterySlot))
+        {
+            cost *= 2;
+        }
+        if (RM.IsActive(Relic.Museum) && RM.GetValue(Relic.Museum) >= 25)
+        {
+            cost *= 2;
+        }
+        if (FindBlockType(Block.Type.Protector))
+        {
+            cost = 1;
+        }
+
+        cost = Mathf.Max(cost, 0);
+        return cost;
+    }
     /// <summary>
     /// Applied to energy from lines
     /// </summary>
-    private void GainEnergyFromLine(float value)
-    {
-        float mult = 1f;
-        if (FindBlockType(Block.Type.Protector))
-        {
-            mult *= 0.1f;
-        }
-        if (RM.IsActive(RelicsManager.RelicType.Transistor))
-        {
-            mult *= 1f + 0.1f * RelicsManager.Instance.GetCount(RelicsManager.RelicType.Transistor);
-        }
-        if (RM.IsActive(RelicsManager.RelicType.ShockModule))
-        {
-            mult = 0f;
-        }
-
-        bool flag = false;
-        for (int y = 0; y < glass_h; y++)
-        {
-            for (int x = 0; x < glass_w; x++)
-            {
-                if (!glass[y][x].IsEmpty()) break;
-            }
-        }
-        if (flag && RM.IsActive(RelicsManager.RelicType.CleanContract))
-        {
-            mult *= 2f;
-        }
-
-        GainEnergy(value * mult);
-    }
+    //private void GainEnergyFromLine(float value)
+    //{
+    //    PlayerStatEventManager.Instance.GainEnergy(value);
+    //}
 
     /// <summary>
     /// Applied to all energy sources
     /// </summary>
     private void GainEnergy(float value)
     {
-        float mult = 1f;
-        int block_count = 0;
-        int empty_count = 0;
-        for(int y = 0; y < glass_h; y++)
-        {
-            for(int x = 0; x < glass_w; x++)
-            {
-                if (glass[y][x].type == Block.Type.Empty && y < gameplay.level.laser) empty_count++;
-                if (glass[y][x].type != Block.Type.Empty) block_count++;
-            }
-        }
-
-        int under_laser_cnt = 0;
-        for (int x = 0; x < glass_w; x++)
-        {
-            if (!glass[gameplay.level.laser - 1][x].IsEmpty()) under_laser_cnt++;
-        }
-
-        mult *= 1f + 0.01f * block_count * RM.GetCount(RelicsManager.RelicType.NetworkUpgrade);
-        mult *= 1f + 0.01f * empty_count * RM.GetCount(RelicsManager.RelicType.RecyclingProtocol);
-        mult *= 1f + 0.1f * under_laser_cnt * RM.GetCount(RelicsManager.RelicType.LaserRoulette);
-
-        PlayerStatEventManager.Instance.GainEnergy(value * mult);
+        PlayerStatEventManager.Instance.GainEnergy(value);
     }
+    private void GainBlockEnergy(float energy, int y, int x)
+    {
+        if(energy == 0f)
+        {
+            return;
+        }
+        gameplay.drawGlass.PlayBlockEnergyEffect(energy, y, x);
+        GainEnergy(energy);
+    }
+
     private void AttackPlayer()
     {
         PlayerStatEventManager.Instance.DamagePlayer(total_damage);
@@ -266,26 +286,16 @@ public class InteractionManager : MonoBehaviour
 
         switch (b.type)
         {
-            case Block.Type.Grass:
-                dx = new List<int> { -1, 1 };
-                dy = new List<int> { 0, 0 };
-                for (int i = 0; i < 2; i++)
-                {
-                    int nx = dx[i] + x;
-                    int ny = dy[i] + y;
-                    if (nx >= 0 && nx < glass_w && ny >= 0 && ny < glass_h && !glass[ny][nx].IsSolid())
-                    {
-                        glass[ny][nx] = b.Clone();
-                        flag = true;
-                    }
-                }
-                return flag;
-
-
+            
             case Block.Type.Bush:
                 dx = new List<int> { -1, 0, 1, 0 };
                 dy = new List<int> { 0, -1, 0, 1, };
-                for (int i = 0; i < 4; i++)
+                if (RM.IsActive(Relic.Fertilizer))
+                {
+                    dx = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
+                    dy = new List<int> { 1, 1, 1, 0, -1, -1, -1, 0 };
+                }
+                for (int i = 0; i < dx.Count; i++)
                 {
                     int nx = dx[i] + x;
                     int ny = dy[i] + y;
@@ -303,32 +313,10 @@ public class InteractionManager : MonoBehaviour
             //    break;
 
             case Block.Type.Grenade:
-                RelicEvents.Instance.ExplotionCaused(); 
-                glass[y][x] = new Block(Block.Type.Exploded);
-                dx = new List<int> { -1, -1, -1, 0, 1, 1, 1, 0 };
-                dy = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
-                for (int i = 0; i < 8; i++)
-                {
-                    int nx = dx[i] + x;
-                    int ny = dy[i] + y;
-                    if (InBounds(ny, nx))
-                    {
-                        DestroyBlock(ny, nx);
-                    }
-                }
+            case Block.Type.Laser:
+                DestroyBlock(y, x);
                 return true;
 
-            case Block.Type.Laser:
-                RelicEvents.Instance.ExplotionCaused();
-                glass[y][x] = new Block(Block.Type.Exploded);
-                for (int ny = y - 1; ny >= 0; ny--)
-                {
-                    if (InBounds(ny, x))
-                    {
-                        DestroyBlock(ny, x);
-                    }
-                }
-                return true;
 
             case Block.Type.Downloader:
                 for (int ny = y - 1; ny >= 0; ny--)
@@ -341,18 +329,36 @@ public class InteractionManager : MonoBehaviour
                 }
                 return flag;
 
+            case Block.Type.Mirror:
+                {
+                    int nx = glass_w - 1 - x;
+
+                    if (!glass[y][nx].IsSolid())
+                    {
+                        glass[y][nx] = new Block(Block.Type.Mirror);
+                        return true;
+                    }
+                    return false;
+                }
+
             case Block.Type.Cleaner:
-                glass[y][x] = new Block(Block.Type.Default);
+                glass[y][x] = new Block(Block.Type.Default, 8);
                 dx = new List<int> { -1, -1, -1, 0, 1, 1, 1, 0 };
                 dy = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < dx.Count; i++)
                 {
                     int nx = dx[i] + x;
                     int ny = dy[i] + y;
-                    if (InBounds(ny, nx) && glass[ny][nx].type != Block.Type.Empty && glass[ny][nx].type != Block.Type.Default)
+
+                    //if (InBounds(ny, nx)) Debug.Log(glass[ny][nx].type);
+
+                    if (!InBounds(ny, nx)) continue;
+                    Block nb = glass[ny][nx];
+                    if (nb.IsEmpty() || nb.type == Block.Type.Default || nb.type == Block.Type.Cleaner)
                     {
-                        glass[ny][nx] = new Block(Block.Type.Default, 8);
+                        continue;
                     }
+                    glass[ny][nx] = new Block(Block.Type.Default, 8);
                 }
                 return true;
 
@@ -403,31 +409,14 @@ public class InteractionManager : MonoBehaviour
             case Block.Type.Stone: return;
 
             case Block.Type.Bomb:
-                RelicEvents.Instance.ExplotionCaused();
-
-                glass[y][x] = new Block(Block.Type.Cleared);
-                List<int> dx = new List<int> { -1, -1, -1, 0, 1, 1, 1, 0 };
-                List<int> dy = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
-
-                for (int i = 0; i < 8; i++)
-                {
-                    int nx = dx[i] + x;
-                    int ny = dy[i] + y;
-                    if (InBounds(ny, nx))
-                    {
-                        DestroyBlock(ny, nx);
-                    }
-                }
+                DestroyBlock(y, x);
                 break;
 
             case Block.Type.Coin:
                 PlayerStatEventManager.Instance.AddMoney(5);
                 break;
             case Block.Type.ExtraEnergy:
-                PlayerStatEventManager.Instance.GainEnergy(2);
-                break;
-            case Block.Type.Poison:
-                //Stats.Instance.poison++;
+                GainBlockEnergy(2, y, x);
                 break;
             case Block.Type.Heal:
                 PlayerStatEventManager.Instance.HealPlayer(2);
@@ -441,14 +430,14 @@ public class InteractionManager : MonoBehaviour
                 break;
 
             case Block.Type.TempEnergy:
-                PlayerStatEventManager.Instance.GainEnergy(5);
+                GainBlockEnergy(10, y, x);
                 break;
-            case Block.Type.TempHeal:
-                PlayerStatEventManager.Instance.HealPlayer(5);
-                break;
-            case Block.Type.TempFire:
-                total_damage += 10;
-                break;
+            //case Block.Type.TempHeal:
+            //    PlayerStatEventManager.Instance.HealPlayer(5);
+            //    break;
+            //case Block.Type.TempFire:
+            //    total_damage += 10;
+            //    break;
 
             case Block.Type.Empty:
                 Debug.LogWarning("Clearing empty block");
@@ -471,6 +460,15 @@ public class InteractionManager : MonoBehaviour
             return false;
         }
 
+        // Expltion area
+        List<int> expl_dx = new List<int> { -1, -1, -1, 0, 1, 1, 1, 0 };
+        List<int> expl_dy = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
+        if (RM.IsActive(Relic.BombUpgrade))
+        {
+            expl_dx = new List<int> { -1, 0, 1, -2, -1, 0, 1, 2, -2, -1, 1, 2, -2, -1, 0, 1, 2, -1, 0, 1 };
+            expl_dy = new List<int> { -2, -2, -2, -1, -1, -1, -1, -1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2 };
+        }
+
         Block.Type type = glass[y][x].type;
         switch (type)
         {
@@ -482,14 +480,15 @@ public class InteractionManager : MonoBehaviour
             case Block.Type.Metal: return false;
 
             case Block.Type.Bomb:
+            case Block.Type.Grenade:
+                CameraShake.Instance.ShakeCamera(0.2f, 0.2f);
                 RelicEvents.Instance.ExplotionCaused();
                 glass[y][x] = new Block(Block.Type.Exploded);
-                List<int> dx = new List<int> { -1, -1, -1, 0, 1, 1, 1, 0 };
-                List<int> dy = new List<int> { -1, 0, 1, 1, 1, 0, -1, -1 };
-                for (int i = 0; i < 8; i++)
+                
+                for (int i = 0; i < expl_dx.Count; i++)
                 {
-                    int nx = dx[i] + x;
-                    int ny = dy[i] + y;
+                    int nx = expl_dx[i] + x;
+                    int ny = expl_dy[i] + y;
                     if (InBounds(ny, nx))
                     {
                         DestroyBlock(ny, nx);
@@ -497,16 +496,55 @@ public class InteractionManager : MonoBehaviour
                 }
                 break;
 
+            case Block.Type.Laser:
+                RelicEvents.Instance.ExplotionCaused();
+                glass[y][x] = new Block(Block.Type.Exploded);
+                if (RM.IsActive(Relic.LaserSplitter))
+                {
+                    for (int nx = 0; nx < glass_w; nx++)
+                    {
+                        if (x != nx && InBounds(y, nx))
+                        {
+                            DestroyBlock(y, nx);
+                        }
+                    }
+                    for (int ny = 0; ny < glass_h; ny++)
+                    {
+                        if (y != ny && InBounds(ny, x))
+                        {
+                            DestroyBlock(ny, x);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int ny = y - 1; ny >= 0; ny--)
+                    {
+                        if (InBounds(ny, x))
+                        {
+                            DestroyBlock(ny, x);
+                        }
+                    }
+                }
+                return true;
             case Block.Type.Cursed:
                 //do dmg idk
                 break;
 
+            case Block.Type.Empty:
+                break;
+
             default:
+                if (RM.IsActive(Relic.Detonator))
+                {
+                    GainBlockEnergy(RM.GetCount(Relic.Detonator), y, x);
+                }
                 break;
         }
         glass[y][x] = new Block(Block.Type.Exploded);
         return true;
     }
+
 
     /// <summary>
     /// Update special block, returns true if special block was updated
@@ -653,10 +691,10 @@ public class InteractionManager : MonoBehaviour
         {
             for (int y = 0; y < glass_h; y++)
             {
-                if (glass[y][x].type == Block.Type.Exploded)
-                {
-                    PlayerStatEventManager.Instance.GainEnergy(RM.GetCount(RelicsManager.RelicType.Detonator));
-                }
+                //if (glass[y][x].type == Block.Type.Exploded)
+                //{
+                //    PlayerStatEventManager.Instance.GainEnergy(RM.GetCount(RelicsManager.RelicType.Detonator));
+                //}
                 if (glass[y][x].type == Block.Type.Exploded || glass[y][x].type == Block.Type.Cleared)
                 {
                     flag = true;
@@ -696,6 +734,11 @@ public class InteractionManager : MonoBehaviour
                         break;
 
                     case Block.Type.SolarPanel:
+                        if (RM.IsActive(Relic.DoubleSun))
+                        {
+                            GainBlockEnergy(1, y, x);
+                            break;
+                        }
                         bool blocks_up = false;
                         for(int y1 = y + 1; y1 < glass_h; y1++)
                         {
@@ -707,7 +750,7 @@ public class InteractionManager : MonoBehaviour
                         }
                         if (!blocks_up)
                         {
-                            PlayerStatEventManager.Instance.GainEnergy(1);
+                            GainBlockEnergy(1, y, x);
                         }
                         break;
 
@@ -742,18 +785,40 @@ public class InteractionManager : MonoBehaviour
                         glass[y][x] = new Block(Block.Type.Default, 1);
                         flag = true;
                         break;
-                    case Block.Type.TempHeal:
-                        glass[y][x] = new Block(Block.Type.Default);
-                        flag = true;
-                        break;
-                    case Block.Type.TempFire:
-                        glass[y][x] = new Block(Block.Type.Default);
-                        flag = true;
-                        break;
+                    //case Block.Type.TempHeal:
+                    //    glass[y][x] = new Block(Block.Type.Default);
+                    //    flag = true;
+                    //    break;
+                    //case Block.Type.TempFire:
+                    //    glass[y][x] = new Block(Block.Type.Default);
+                    //    flag = true;
+                    //    break;
 
                     default:
                         break;
                 }
+            }
+        }
+
+        // check if matrix is empty
+        if (RM.IsActive(Relic.CleanContract))
+        {
+            bool isEmpty = true;
+            for (int x = 0; x < glass_w; x++)
+            {
+                for (int y = 0; y < glass_h; y++)
+                {
+                    if (!glass[y][x].IsEmpty())
+                    {
+                        isEmpty = false;
+                        break;
+                    }
+                }
+                if (!isEmpty) break;
+            }
+            if (isEmpty)
+            {
+                PlayerStatEventManager.Instance.GainEnergy(30);
             }
         }
         return flag;
@@ -790,10 +855,11 @@ public class InteractionManager : MonoBehaviour
                     {
                         case Block.Type.Empty: break;
 
-                        case Block.Type.Mirror:
-                            if (!glass[y][glass_w - 1 - x].IsSolid())
-                                glass[y][glass_w - 1 - x] = gameplay.pieceManager.shape[i][j];
-                            break;
+                        //case Block.Type.Mirror:
+                        //    glass[y][x] = gameplay.pieceManager.shape[i][j];
+                        //    if (!glass[y][glass_w - 1 - x].IsSolid())
+                        //        glass[y][glass_w - 1 - x] = gameplay.pieceManager.shape[i][j];
+                        //    break;
 
                         case Block.Type.Ghost:
                             if (glass[y][x].type == Block.Type.Ghost)
@@ -854,7 +920,23 @@ public class InteractionManager : MonoBehaviour
         return flag;
     }
 
+    private void UpdateCombo()
+    {
+        if (Stats.Instance.combo == 0f)
+        {
+            PlayerStatEventManager.Instance.SetCombo(Stats.Instance.combo_default);
+        }
+        else
+        {
+            PlayerStatEventManager.Instance.AddCombo(Stats.Instance.combo_mult);
+        }
+        PlayerStatEventManager.Instance.AddCombo((clear_lines_cnt - 1) * Stats.Instance.combo_mult);
 
+        if(clear_lines_cnt > 1 && RM.IsActive(Relic.ParallelModule))
+        {
+            PlayerStatEventManager.Instance.AddCombo(clear_lines_cnt * 0.2f);
+        }
+    }
 
 
     /// <summary>
@@ -870,6 +952,16 @@ public class InteractionManager : MonoBehaviour
         {
             stop_flag = false;
             return;
+        }
+
+        // Count combo
+        UpdateCombo();
+
+        // clear effects
+        foreach (int i in fullLines)
+        {
+            float val = Stats.Instance.combo * GetLineCost();
+            gameplay.drawGlass.PlayLineClearEffect(i, val);
         }
 
         blockSortList.Clear();
@@ -912,7 +1004,8 @@ public class InteractionManager : MonoBehaviour
         {
             for (int j = 0; j < glass_w; j++)
             {
-                if (glass[i][j].IsSolid())
+                // don't trigger on bedrock & ghosts
+                if (glass[i][j].IsSolid() && glass[i][j].type != Block.Type.Bedrock)
                 {
                     max_height = i;
                 }
@@ -933,13 +1026,13 @@ public class InteractionManager : MonoBehaviour
         }
 
         float mult = 1f;
-        if (RM.IsActive(RelicsManager.RelicType.Resistor))
+        if (RM.IsActive(Relic.Resistor))
         {
-            mult *= Mathf.Pow(0.9f, RM.GetCount(RelicsManager.RelicType.Resistor));
+            mult *= Mathf.Pow(0.9f, RM.GetCount(Relic.Resistor));
         }
         total_damage += (int)(mult * (line_damage + extra_damage));
 
-        if (RM.IsActive(RelicsManager.RelicType.DeathLaser)) total_damage += 9999; // rip
+        if (RM.IsActive(Relic.DeathLaser)) total_damage += 9999; // rip
 
         return true;
     }

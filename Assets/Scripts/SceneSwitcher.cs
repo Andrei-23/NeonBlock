@@ -6,8 +6,19 @@ using UnityEngine.SceneManagement;
 public class SceneSwitcher : MonoBehaviour
 {
 
+    //public static SceneSwitcher Instance { get; private set; }
+
     private void Awake()
     {
+        //if(Instance == null)
+        //{
+        //    Instance = this;
+        //}
+        //else
+        //{
+        //    Destroy(this);
+        //}
+
         PlayerStatEventManager.Instance.OnDeath += OpenDeathScreen;
     }
     private void OnDestroy()
@@ -15,60 +26,53 @@ public class SceneSwitcher : MonoBehaviour
         PlayerStatEventManager.Instance.OnDeath -= OpenDeathScreen;
     }
 
-    public void LoadScene(int id)
+    public static void LoadScene(int id)
     {
-        Stats.Instance.Save();
-        HintEventManager.Instance.SetVisibility(true);
+        //Stats.Instance.Save();
+        //HintEventManager.Instance.SetVisibility(true);
         SceneManager.LoadScene(id);
     }
-    public void OpenLevel()
+    public static void OpenLevel()
     {
         LoadScene(4);
     }
-    public void StartGame()
+    public static void StartGame()
     {
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.main_music);
+        AudioManager.Instance.SetMusic(SoundClip.gameMusic);
+        GameStateManager.Instance.SetState(GameState.Menu);
+        GameStateManager.Instance.SetPauseState(false);
         OpenMap();
     }
-    public void OpenMap()
+    public static void OpenMap()
     {
         LoadScene(6);
     }
 
-    public void OpenDeathScreen()
+    public static void OpenDeathScreen()
     {
-        AudioManager.Instance.StopMusic();
-        AudioManager.Instance.PlaySound(AudioManager.Instance.loseSound);
+        AudioManager.Instance.StopAllMusic();
+        AudioManager.Instance.PlaySound(SoundClip.loseSound);
         LoadScene(3);
     }
-    public void OpenMainMenu()
+    public static void OpenMainMenu()
     {
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.menu_music);
+        AudioManager.Instance.SetMusic(SoundClip.meunMusic);
         LoadScene(0);
     }
-    public void OpenWinScene()
+    public static void OpenWinScene()
     {
-        AudioManager.Instance.PlayMusic(AudioManager.Instance.menu_music);
-        AudioManager.Instance.PlaySound(AudioManager.Instance.winSound);
+        AudioManager.Instance.SetMusic(SoundClip.meunMusic);
+        AudioManager.Instance.PlaySound(SoundClip.winSound);
         LoadScene(7);
     }
 
     /// <summary>
     /// Close the game
     /// </summary>
-    public void ExitGame()
+    public static void ExitGame()
     {
         Stats.Instance.Save();
         Application.Quit();
     }
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
 }

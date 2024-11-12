@@ -9,6 +9,8 @@ public class PieceView : MonoBehaviour
     public GridLayoutGroup grid;
     public GameObject frameObj;
     public GameObject blockPrefub;
+    [SerializeField] private bool _fixedFrame = false; // if true, use default frame
+
     //public Sprite[] sprites;
     //private FigureData fd;
 
@@ -20,11 +22,17 @@ public class PieceView : MonoBehaviour
     [HideInInspector] public int h = 3;
     [HideInInspector] public List<List<Block>> shape;
 
+    public bool showOnPause;
+    public bool tryPerfectSize;
+    //[HideInInspector] public bool hideOnGame;
+    // if false, invisible in gameplay state, even on pause. Use for pause menu and inventory
+
     private GameObject[] blocks;
 
     private BlockDataManager blockDataManager;
     private float widthMult = 0.88f;
     //private int cur_color = 0;
+
 
     private void Awake()
     {
@@ -85,9 +93,13 @@ public class PieceView : MonoBehaviour
         h = shape.Count;
         w = shape[0].Count;
 
-        if (frameObj != null && !lockMaterial)
+        if(frameObj != null && !_fixedFrame)
         {
-            frameObj.GetComponent<Image>().material = RarityMaterials.Instance.GetRarityFrameMaterial(piece.rarity);
+            if (!lockMaterial)
+            {
+                frameObj.GetComponent<Image>().material = RarityMaterials.Instance.GetRarityFrameMaterial(piece.rarity);
+            }
+            frameObj.GetComponent<Image>().sprite = RarityMaterials.Instance.GetRarityFrameSprite(piece.rarity);
         }
         UpdateView();
     }
@@ -97,7 +109,7 @@ public class PieceView : MonoBehaviour
 
         float w0 = 34f;
         float cell_w = w0;
-        if(w >= 4 || cell_w * w > Mathf.Min(obj_w, obj_h))
+        if(!tryPerfectSize || w >= 4 || cell_w * w > Mathf.Min(obj_w, obj_h))
         {
             cell_w = Mathf.Min(obj_w, obj_h) / w;
         }
@@ -129,6 +141,11 @@ public class PieceView : MonoBehaviour
             {
                 int pos = i * w + j;
                 blocks[pos] = Instantiate(blockPrefub, grid.transform);
+                if (blocks[pos].GetComponent<BlockHintColliderScript>() != null)
+                {
+                    blocks[pos].GetComponent<BlockHintColliderScript>().showOnPause = showOnPause;
+                    //blocks[pos].GetComponent<BlockHintColliderScript>().hideOnGame = hideOnGame;
+                }
                 BoxCollider2D bc;
                 if (blocks[pos].TryGetComponent(out bc))
                 {

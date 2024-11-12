@@ -40,9 +40,9 @@ public class PieceData
     public Color specialColor = new Color(0.018f, 0f, 1f);
 
     // probability of at least this rarity
-    private float legendaryProb = 0.05f;// 0.05
-    private float epicProb = 0.2f;     // 0.15
-    private float rareProb = 0.5f;      // 0.30
+    //private float legendaryProb = 0.05f;// 0.05
+    //private float epicProb = 0.2f;     // 0.15
+    //private float rareProb = 0.5f;      // 0.30
     // default prob is 0.50
 
     public enum Rarity
@@ -345,10 +345,11 @@ public class PieceData
         {
             piece = ReadPiece(new List<string>
             {
-                "*#",
-                "*#",
+                "01",
+                "01",
             }, new List<Block.Type> {
                 Block.Type.TempBlock,
+                Block.Type.ExtraEnergy,
             }),
             color = 3,
         });
@@ -402,7 +403,7 @@ public class PieceData
             piece = ReadPiece(new List<string>
             {
                 "   ",
-                "#*#",
+                "$*$",
                 "   ",
             }, new List<Block.Type> {
                 Block.Type.TempBlock,
@@ -1339,7 +1340,7 @@ public class PieceData
             rarity = Rarity.Legendary,
         });
 
-        Debug.Log("non-bad pieces: " + piece_data.Count().ToString());
+        Debug.Log("pieces loaded: " + piece_data.Count().ToString());
 
         // Bad
 
@@ -1615,6 +1616,10 @@ public class PieceData
         return new Piece(piece_data[id].piece).Clone();
     }
 
+    //private float legendaryProb = 0.05f;// 0.05
+    //private float epicProb = 0.2f;     // 0.15
+    //private float rareProb = 0.5f;      // 0.30
+
     /// <summary>
     /// Returns common, rare, epic or legendary Rarity
     /// </summary>
@@ -1622,10 +1627,20 @@ public class PieceData
     public Rarity GetRandomRarity()
     {
         float x = UnityEngine.Random.Range(0f, 1f);
-        if (x <= legendaryProb) return Rarity.Legendary;
-        else if (x < epicProb) return Rarity.Epic;
-        else if (x < rareProb) return Rarity.Rare;
-        else return Rarity.Common;
+        if (RelicsManager.Instance.IsActive(RelicsManager.RelicType.Diamond))
+        {
+            if (x <= 0.15) return Rarity.Legendary; // 0.15
+            else if (x < 0.4) return Rarity.Epic; // 0.25
+            else if (x < 0.75) return Rarity.Rare; // 0.35
+            else return Rarity.Common; // 0.25
+        }
+        else
+        {
+            if (x <= 0.08f) return Rarity.Legendary; // 0.08
+            else if (x < 0.28) return Rarity.Epic; // 0.2
+            else if (x < 0.6f) return Rarity.Rare; // 0.32
+            else return Rarity.Common; // 0.4
+        }
     }
     public int GetRandomPieceId(Rarity rarity)
     {

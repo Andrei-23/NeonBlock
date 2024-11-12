@@ -14,6 +14,6 @@ public class DeleteOption : MonoBehaviour
     public void Choose()
     {
         Stats.Instance.AddPiece(piece_id, -1);
-        sceneSwitcher.OpenMap();
+        SceneSwitcher.OpenMap();
     }
 }

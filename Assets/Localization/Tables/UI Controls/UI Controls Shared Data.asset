@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Controls Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI Controls
+  m_TableCollectionNameGuidString: f0fec7eed0eb0f04f8e584f76c1788f0
+  m_Entries:
+  - m_Id: 368438439936
+    m_Key: Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 572625547264
+    m_Key: Right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 583736258560
+    m_Key: Down
+    m_Metadata:
+      m_Items: []
+  - m_Id: 602879062016
+    m_Key: Drop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 612857311232
+    m_Key: Rotate L
+    m_Metadata:
+      m_Items: []
+  - m_Id: 637574344704
+    m_Key: Rotate R
+    m_Metadata:
+      m_Items: []
+  - m_Id: 659577663488
+    m_Key: Hold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709213057024
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3534170551759929355
+  references:
+    version: 2
+    RefIds:
+    - rid: 3534170551759929355
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1716094359058

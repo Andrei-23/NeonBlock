@@ -30,9 +30,11 @@ public class Gameplay : MonoBehaviour
         sceneSwitcher = GetComponent<SceneSwitcher>();
         RelicEvents.Instance.ResetLevelValues();
 
-        if(MapDataSaver.Instance.curLevelDifficulty == LevelDataManager.LevelType.boss)
+        GameStateManager.Instance.SetState(GameState.Preview);
+
+        if (MapDataSaver.Instance.curLevelDifficulty == LevelDataManager.LevelType.boss)
         {
-            AudioManager.Instance.PlayMusic(AudioManager.Instance.boss_music);
+            AudioManager.Instance.SetMusic(SoundClip.bossMusic);
         }
         
         level = LevelDataManager.Instance.GetRandomLevel(MapDataSaver.Instance.curLevelDifficulty);
@@ -40,6 +42,13 @@ public class Gameplay : MonoBehaviour
         Stats.Instance.turn_limit += level.turns_extra;
         level.laser += RelicsManager.Instance.GetCount(RelicsManager.RelicType.ExtraSpace);
         level.laser += RelicsManager.Instance.GetCount(RelicsManager.RelicType.DeathLaser) * 2;
+        if(level.laser > 13)
+        {
+            level.laser = 13;
+        }
+
+        // Dont use in actual game
+        // level.pieces.Add(RandomBlockWallGenerator.GenerateWall());
 
         PlayerStatEventManager.Instance.CurrentLiveState = PlayerLiveState.Alive;
     }
@@ -51,8 +60,9 @@ public class Gameplay : MonoBehaviour
     public void Launch() // start of gameplay
     {
         started = true;
-        HintEventManager.Instance.SetVisibility(false);
+        //HintEventManager.Instance.SetVisibility(false);
         PieceStateManager.Instance.SetState(PieceState.Default);
+        GameStateManager.Instance.SetState(GameState.Gameplay);
         drawGlass.Launch();
         pieceManager.Launch();
         levelStartInfoManager.Launch();
@@ -68,8 +78,13 @@ public class Gameplay : MonoBehaviour
     {
         if (RelicsManager.Instance.IsActive(RelicsManager.RelicType.OverchargeModule))
         {
-            int val = Mathf.Max(Stats.Instance.energy - Stats.Instance.energy_task, 0);
+            int val = Mathf.Max((int)(Stats.Instance.energy - Stats.Instance.energy_task), 0);
             PlayerStatEventManager.Instance.AddMoney(val);
+        }
+        if (RelicsManager.Instance.IsActive(RelicsManager.RelicType.Circle))
+        {
+            int val = RelicsManager.Instance.GetValue(RelicsManager.RelicType.Circle) / 10;
+            PlayerStatEventManager.Instance.HealPlayer(val);
         }
 
         StartCoroutine(waiter(0.7f));
@@ -81,6 +96,7 @@ public class Gameplay : MonoBehaviour
 
         Stats.Instance.energy_task -= level.task_extra;
         Stats.Instance.turn_limit -= level.turns_extra;
+
         Stats.Instance.lvl_cnt++;
 
         if (level.type == LevelDataManager.LevelType.miniboss)
@@ -94,20 +110,22 @@ public class Gameplay : MonoBehaviour
 
         RelicEvents.Instance.ResetLevelValues();
 
-        HintEventManager.Instance.SetVisibility(true);
+        GameStateManager.Instance.SetPauseState(false);
+        GameStateManager.Instance.SetState(GameState.Menu);
+        //HintEventManager.Instance.SetVisibility(true);
 
         switch (MapDataSaver.Instance.curLevelDifficulty){
             case LevelDataManager.LevelType.standart:
-                sceneSwitcher.LoadScene(1);
+                SceneSwitcher.LoadScene(1);
                 break;
             case LevelDataManager.LevelType.miniboss:
-                sceneSwitcher.LoadScene(5);
+                SceneSwitcher.LoadScene(5);
                 break;
             case LevelDataManager.LevelType.boss:
-                sceneSwitcher.OpenWinScene();
+                SceneSwitcher.OpenWinScene();
                 break;
             default:
-                sceneSwitcher.OpenMap();
+                SceneSwitcher.OpenMap();
                 break;
         }
     }

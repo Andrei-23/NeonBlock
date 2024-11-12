@@ -275,7 +275,6 @@ public class LevelDataManager
                     "..........",
                     "#........#",
                 }),
-                difficulty = 1,
             });
             data.Add(new LevelData()
             {
@@ -283,7 +282,6 @@ public class LevelDataManager
                     "###....###",
                     ".#.#..#.#.",
                 }),
-                difficulty = 1,
             });
             data.Add(new LevelData()
             {
@@ -292,10 +290,69 @@ public class LevelDataManager
                     ".#......#.",
                     ".#......#.",
                 }),
-                difficulty = 1,
+            });
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    ".########.",
+                    "..........",
+                    "..........",
+                }),
+            });
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    ".........#",
+                    "........##",
+                    ".......###",
+                    "......###.",
+                    ".....###..",
+                    "....###...",
+                }),
+                laser = 8,
+            });
+
+            // Sand
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    "0000......",
+                    "000000....",
+                    "#######...",
+                    "#.#####...",
+                    ".##.###...",
+                    ".#.####0..",
+                }, new List<Block.Type>
+                {
+                    Block.Type.Sand,
+                }),
+                laser = 8,
+            });
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    "..****....",
+                    "********..",
+                }, new List<Block.Type>
+                {
+                    Block.Type.Sand,
+                }),
             });
 
 
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    "*S...S*S..",
+                    ".SS*SS.SS*",
+                    "*SS.SS*SS.",
+                    ".S###S.S##",
+                    "$$$$$$$$$.",
+                }, new List<Block.Type>
+                {
+                    Block.Type.Bomb,
+                }),
+            });
 
             data.Add(new LevelData()
             {
@@ -318,8 +375,8 @@ public class LevelDataManager
             data.Add(new LevelData()
             {
                 glass = ReadLevel(new List<string> {
-                    ".##.##.##.",
-                    ".##.##.##.",
+                    "##......##",
+                    "##......##",
                 }),
                 difficulty = 1,
 
@@ -340,11 +397,35 @@ public class LevelDataManager
                         "##",
                         "##",
                     }),
+                }
+            });
+
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    ".#......#.",
+                    "###....###",
+                }),
+                laser = 7,
+                pieces = {
                     PieceData.Instance.ReadPiece(new List<string>
                     {
-                        "##",
-                        "##",
-                    }),
+                        "00",
+                        "00",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " 0 ",
+                        "000",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "    ",
+                        "0000",
+                        "    ",
+                        "    ",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
                 }
             });
         }
@@ -362,18 +443,18 @@ public class LevelDataManager
                     "####.##.##",
                 }),
                 laser = 9,
-                task_extra = 100,
+                task_extra = 60,
                 type = LevelType.miniboss,
             });
             data.Add(new LevelData()
             {
                 glass = ReadLevel(new List<string> {
-                    "000000....",
-                    "#....#....",
+                    "#######...",
+                    "##........",
                     "..........",
                     "..........",
-                    "..........",
-                    "#....#....",
+                    "........##",
+                    "...#######",
                 }, new List<Block.Type>
                 {
                     Block.Type.ExtraEnergy,
@@ -385,37 +466,172 @@ public class LevelDataManager
             data.Add(new LevelData()
             {
                 glass = ReadLevel(new List<string> {
-                    "##..##..##",
+                    "...####...",
                 }),
                 laser = 10,
                 type = LevelType.miniboss,
-                task_extra = 10,
-                turns_extra = 2,
+                task_extra = 20,
+                turns_extra = 0,
                 pieces = {
                     PieceData.Instance.ReadPiece(new List<string>
                     {
                         "###",
-                        "00#",
-                        "###",
-                    }, new List<Block.Type>{Block.Type.Sand}),
-                    PieceData.Instance.ReadPiece(new List<string>
-                    {
-                        "###",
-                        "**#",
+                        "***",
                         "###",
                     }, new List<Block.Type>{Block.Type.Ghost}),
                     PieceData.Instance.ReadPiece(new List<string>
                     {
-                        "###",
-                        "**#",
-                        "###",
+                        "##*",
+                        "#*#",
+                        "*##",
                     }, new List<Block.Type>{Block.Type.Coin}),
                     PieceData.Instance.ReadPiece(new List<string>
                     {
+                        "***",
                         "###",
-                        "  #",
                         "###",
-                    })
+                    }, new List<Block.Type>{Block.Type.Sand}),
+                }
+            });
+
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+
+                    "..*....*..",
+                    "..*....*..",
+                    ".**.##.**.",
+                    "###.#####.",
+                }, new List<Block.Type>
+                {
+                    Block.Type.Mirror,
+                }),
+                laser = 7,
+                type = LevelType.miniboss,
+                task_extra = 50,
+                turns_extra = 0,
+
+                pieces =
+                {
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "..*",
+                        "***",
+                        "...",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        ".*.",
+                        "***",
+                        "...",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "**.",
+                        ".**",
+                        "...",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "....",
+                        "****",
+                        "....",
+                        "....",
+                    }, new List<Block.Type>{Block.Type.Mirror}),
+                }
+            });
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    "#........#",
+                    "#........#",
+                    "##......##",
+                }),
+                laser = 8,
+                type = LevelType.miniboss,
+                task_extra = 50,
+                turns_extra = 0,
+                pieces = {
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " 0 ",
+                        "000",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Chained}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " 0 ",
+                        "00 ",
+                        "0  ",
+                    }, new List<Block.Type>{Block.Type.Chained}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " 00",
+                        " 0 ",
+                        " 0 ",
+                    }, new List<Block.Type>{Block.Type.Chained}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "    ",
+                        "0000",
+                        "    ",
+                        "    ",
+                    }, new List<Block.Type>{Block.Type.Chained}),
+                }
+            });
+            data.Add(new LevelData()
+            {
+                glass = ReadLevel(new List<string> {
+                    "....##....",
+                    "...####...",
+                }),
+                laser = 8,
+                type = LevelType.miniboss,
+                task_extra = 60,
+                turns_extra = 2,
+                pieces = {
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " # ",
+                        "#0#",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Cursed}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "0  ",
+                        "###",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Cursed}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        " 0#",
+                        "## ",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Cursed}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "    ",
+                        "0##0",
+                        "    ",
+                        "    ",
+                    }, new List<Block.Type>{Block.Type.Cleaner}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "00",
+                        "00",
+                    }, new List<Block.Type>{Block.Type.Cleaner}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "## ",
+                        " 00",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Cleaner}),
+                    PieceData.Instance.ReadPiece(new List<string>
+                    {
+                        "  0",
+                        "0##",
+                        "   ",
+                    }, new List<Block.Type>{Block.Type.Cleaner}),
                 }
             });
         }
@@ -436,7 +652,7 @@ public class LevelDataManager
                     Block.Type.Protector,
                 }),
                 laser = 8,
-                task_extra = 80,
+                task_extra = 0,
                 turns_extra = 3,
                 delete_from_top = true,
                 type = LevelType.boss,
@@ -451,7 +667,7 @@ public class LevelDataManager
                     "..........",
                 }),
                 laser = 11,
-                task_extra = 150,
+                task_extra = 50,
                 turns_extra = 5,
                 delete_from_top = true,
                 type = LevelType.boss,

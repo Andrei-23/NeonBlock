@@ -14,14 +14,13 @@ public class ChoosePieceOption : MonoBehaviour
     //public PieceData.Rarity rarity; // can do all options epic or bad
     public bool isBad;
     public PieceView pv;
-    public GameObject edgePanel;
-    private SceneSwitcher sceneSwitcher;
+    //public GameObject edgePanel;
 
     [HideInInspector] public int figure_id;
 
     private void Awake()
     {
-        sceneSwitcher = Camera.main.GetComponent<SceneSwitcher>();
+        //sceneSwitcher = Camera.main.GetComponent<SceneSwitcher>();
     }
     void Start()
     {
@@ -34,14 +33,23 @@ public class ChoosePieceOption : MonoBehaviour
         figure_id = PieceData.Instance.GetRandomPieceId(rarity);
         pv.ResetPiece(figure_id);
 
-        Color edge_color = PieceData.Instance.GetRarityColor(rarity);
-        edgePanel.GetComponent<Image>().color = edge_color;
+        //Color edge_color = PieceData.Instance.GetRarityColor(rarity);
+        //edgePanel.GetComponent<Image>().color = edge_color;
+        //if(rarity == PieceData.Rarity.Epic || rarity == PieceData.Rarity.Legendary)
+        //{
+        //    edgePanel.GetComponent<Image>().sprite = rare_frame_sprite;
+        //}
+        //else
+        //{
+        //    edgePanel.GetComponent<Image>().sprite = common_frame_sprite;
+        //}
     }
+
     public void Choose()
     {
         Stats.Instance.AddPiece(figure_id);
-        AudioManager.Instance.PlaySound(AudioManager.Instance.selectItem);
-        sceneSwitcher.OpenMap();
+        AudioManager.Instance.PlaySound(SoundClip.selectPiece);
+        SceneSwitcher.OpenMap();
     }
 
     // Update is called once per frame

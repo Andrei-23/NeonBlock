@@ -57,7 +57,7 @@ public class ShopPieceOption : MonoBehaviour
         if (RelicsManager.Instance.IsActive(Relic.Discount))
         {
             int count = RelicsManager.Instance.GetCount(Relic.Discount);
-            mult *= Mathf.Pow(0.9f, count);
+            mult *= Mathf.Pow(0.8f, count);
         }
         if (mult != 1f)
         {

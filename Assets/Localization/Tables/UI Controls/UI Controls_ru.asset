@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Controls_ru
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ru
+  m_SharedData: {fileID: 11400000, guid: f0fec7eed0eb0f04f8e584f76c1788f0, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 368438439936
+    m_Localized: "\u0414\u0432\u0438\u0433\u0430\u0442\u044C \u0432\u043B\u0435\u0432\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 709213057024
+    m_Localized: "\u041F\u0430\u0443\u0437\u0430"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 659577663488
+    m_Localized: "\u0423\u0434\u0435\u0440\u0436\u0430\u0442\u044C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 637574344704
+    m_Localized: "\u041F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0432\u043F\u0440\u0430\u0432\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 612857311232
+    m_Localized: "\u041F\u043E\u0432\u0435\u0440\u043D\u0443\u0442\u044C \u0432\u043B\u0435\u0432\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 602879062016
+    m_Localized: "\u0423\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 572625547264
+    m_Localized: "\u0414\u0432\u0438\u0433\u0430\u0442\u044C \u0432\u043F\u0440\u0430\u0432\u043E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 583736258560
+    m_Localized: "\u0414\u0432\u0438\u0433\u0430\u0442\u044C \u0432\u043D\u0438\u0437"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

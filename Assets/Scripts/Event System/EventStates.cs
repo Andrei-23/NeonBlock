@@ -1,7 +1,8 @@
 public enum GameState
 {
-    Gameplay,
-    Paused
+    Gameplay, // playing level
+    Preview, // before level start
+    Menu, // not in game scene: shop, new relic, map...
 }
 
 public enum PieceState

@@ -1,0 +1,151 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Text_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: add9e08792b560a4dbd38b2fc6357144, type: 2}
+  m_Metadata:
+    m_Items:
+    - rid: 3534170299525758976
+  m_TableData:
+  - m_Id: 218991194112
+    m_Localized: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213496655872
+    m_Localized: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211210760192
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208572542976
+    m_Localized: Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203119947776
+    m_Localized: Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 169368383488
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46494810140672
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46599965536256
+    m_Localized: Lines delete from top!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46792635084800
+    m_Localized: 'Required
+
+      energy:<color=white>{task}</color>'
+    m_Metadata:
+      m_Items:
+      - rid: 3534170299525758976
+  - m_Id: 54422233444352
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54936119570432
+    m_Localized: Turns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55170182705152
+    m_Localized: Energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84632823689216
+    m_Localized: New piece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87189646241792
+    m_Localized: Choose relic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87605545037824
+    m_Localized: Remove 1 piece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 88677269401600
+    m_Localized: YOU WIN!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89714868908032
+    m_Localized: $ earned
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89846318395392
+    m_Localized: Energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89996084408320
+    m_Localized: HP lost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90241803513856
+    m_Localized: Pieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90349987196928
+    m_Localized: Turns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90531759943680
+    m_Localized: Levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90659199676416
+    m_Localized: Minibosses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90761335173120
+    m_Localized: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92560968413184
+    m_Localized: Game over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113451144081408
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4064684045266944
+    m_Localized: Extra pieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30787703815827456
+    m_Localized: Line energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30789555873673216
+    m_Localized: 'Combo
+
+      mult'
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3534170299525758976
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 
+        m_SharedEntries:
+        - id: 46792635084800

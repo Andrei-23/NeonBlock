@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Delete Piece.unity
     guid: df5399a2a989d2a4b901869e07d588af
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 52af2e956ed59e947896e21915169424, type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: be18df70e7d37a746aa0dd557dba3f76, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: a3d0e20fbc30af044a3f60f7fb551e75, type: 2}

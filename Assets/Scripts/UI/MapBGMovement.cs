@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class MapBGMovement : MonoBehaviour
 {
-    public GameObject bg;
-    public ScrollRect sr;
+    [SerializeField] private GameObject bg;
+    [SerializeField] private ScrollRect sr;
 
-    public Vector2 speed; // v += speed * dt
-    public Vector2 alpha; // dv *= alpha
+    [SerializeField] private Vector2 speed; // v += speed * dt
+    [SerializeField] private Vector2 alpha; // dv *= alpha
     
-    Vector2 default_pos; // initial pos
-    Vector2 movement = Vector2.zero; // 
+    [SerializeField] private float width = 256; // width of sprite in pixels
 
-    float w = 256; // width of sprite in pixels
+    private Vector2 default_pos; // initial pos
+    private Vector2 movement = Vector2.zero; // 
+
 
     void Awake()
     {
@@ -23,10 +24,10 @@ public class MapBGMovement : MonoBehaviour
 
     Vector2 FixVector(Vector2 pos)
     {
-        while (pos.x >= w) { pos.x -= w; }
-        while (pos.x < 0) { pos.x += w; }
-        while (pos.y >= w) { pos.y -= w; }
-        while (pos.y < 0) { pos.y += w; }
+        while (pos.x >= width) { pos.x -= width; }
+        while (pos.x < 0) { pos.x += width; }
+        while (pos.y >= width) { pos.y -= width; }
+        while (pos.y < 0) { pos.y += width; }
         return pos;
     }
 

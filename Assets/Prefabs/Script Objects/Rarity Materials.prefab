@@ -50,3 +50,7 @@ MonoBehaviour:
   legendaryMaterial: {fileID: 2100000, guid: 24444063196b025478085a434f4a8b3d, type: 2}
   badMaterial: {fileID: 2100000, guid: 85ef031ffd0863546b0a5ae65812c12a, type: 2}
   defautMaterial: {fileID: 2100000, guid: 53bbef99ab7c7a34fa7a5c9ef1ac0caa, type: 2}
+  commonFrameSprite: {fileID: 4358605660785895950, guid: d7525c2a7bca9234899f747bbb16fb70, type: 3}
+  rareFrameSprite: {fileID: 4358605660785895950, guid: d7525c2a7bca9234899f747bbb16fb70, type: 3}
+  epicFrameSprite: {fileID: 44380118110285639, guid: b8875decd89538746a12de068bae6398, type: 3}
+  legendaryFrameSprite: {fileID: 44380118110285639, guid: b8875decd89538746a12de068bae6398, type: 3}

@@ -2,20 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseButtonListener : MonoBehaviour
 {
+    private PlayerInput _playerInput;
+    private InputAction _pauseAction;
+    private void Start()
+    {
+        _playerInput = Camera.main.GetComponent<PlayerInput>();
+        _pauseAction = _playerInput.actions["Pause"];
+    }
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (_pauseAction.WasPressedThisFrame())
         {
-            AudioManager.Instance.PlaySound(AudioManager.Instance.click);
+            // buttons have sound already
+            AudioManager.Instance.PlaySound(SoundClip.UIclick);
             OnClick();
         }
     }
 
     public void OnClick()
     {
-        GameStateManager.Instance.SwitchState();
+        GameStateManager.Instance.SwitchPauseState();
     }
 }

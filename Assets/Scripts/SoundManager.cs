@@ -27,7 +27,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayClearSound(int combo = 0)
     {
-        Debug.Log(combo);
+        //Debug.Log(combo);
         if (combo < 0)
         {
             Debug.LogError("Incorrect combo value");

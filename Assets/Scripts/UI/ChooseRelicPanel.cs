@@ -23,8 +23,8 @@ public class ChooseRelicPanel : MonoBehaviour
     public void Choose()
     {
         RelicsManager.Instance.AddRelic(relic_type);
-        //gameObject.SetActive(false);
-        sceneSwitcher.OpenMap();
+        AudioManager.Instance.PlaySound(SoundClip.selectRelic);
+        SceneSwitcher.OpenMap();
     }
 
 }

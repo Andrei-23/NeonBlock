@@ -13,7 +13,7 @@ public class LevelStartInfoManager : MonoBehaviour
     public GameObject AddedPiecesPanel;
     public GameObject AddedPiecesGrid;
     public GameObject ClearFromTopWarning;
-    public TextMeshProUGUI EnergyTask;
+    //public TextMeshProUGUI EnergyTask;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class LevelStartInfoManager : MonoBehaviour
     {
         SetGameplayActive(false);
         SetAddedPiecesList();
-        EnergyTask.text = "<color=white>Energy: </color>" + Stats.Instance.energy_task.ToString();
+        //EnergyTask.text = "<color=white>Energy: </color>" + Stats.Instance.energy_task.ToString();
         ClearFromTopWarning.SetActive(gameplay.CheckDeleteDirectionTop());
     }
 

@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +14,12 @@ public class DrawGlass : MonoBehaviour
 
     public GameObject laserObj;
     public GameObject laserWarningObj;
+
+    public Transform effectParentObj; // instantiate effects here
+
+    [Header("Effect Prefabs")]
+    public GameObject lineEffectPrefab;
+    public GameObject blockNumberPrefab;
 
     private GameObject[] blocks;
     private int n;
@@ -74,6 +80,38 @@ public class DrawGlass : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Converts block coords to position vector.
+    /// </summary>
+    private Vector2 CoordsToVector(int y, int x)
+    {
+        float w = gridLayoutGroup.cellSize.x + gridLayoutGroup.spacing.x;
+        float pos_x = (x - 5) * w + (w / 2);
+        float pos_y = (y - 7) * w + (w / 2);
+        return new Vector2(pos_x, pos_y);
+    }
+
+    public void PlayLineClearEffect(int line_y, float energy)
+    {
+        GameObject go = Instantiate(lineEffectPrefab, effectParentObj);
+        Vector2 pos = CoordsToVector(line_y, 0);
+        pos.x = 0;
+        go.transform.localPosition = pos;
+        go.GetComponent<LineClearEffect>().RunAnimation(energy);
+    }
+
+    public void PlayBlockEnergyEffect(float energy, int y, int x)
+    {
+        GameObject go = Instantiate(blockNumberPrefab, effectParentObj);
+        Vector2 pos = CoordsToVector(y, x);
+        go.transform.localPosition = pos;
+        go.GetComponent<BlockEnergyEffect>().RunAnimation(energy);
+    }
+
+    public void ShowEnergyNumberOnBlock()
+    {
+
+    }
     void CreateBlockObjects()
     {
         foreach (Transform child in gridObj.transform)
@@ -94,6 +132,12 @@ public class DrawGlass : MonoBehaviour
             {
                 blocks[i] = Instantiate(blockPrefab, gridObj.transform);
                 blocks[i].GetComponent<BoxCollider2D>().size = gridLayoutGroup.cellSize;
+                //if (blocks[i].GetComponent<BlockHintColliderScript>() != null)
+                //{
+                //    blocks[i].GetComponent<BlockHintColliderScript>().showOnPause = 
+                //}
+                blocks[i].GetComponent<BoxCollider2D>().size = gridLayoutGroup.cellSize;
+
             }
         }
 
@@ -202,6 +246,12 @@ public class DrawGlass : MonoBehaviour
         }
     }
 
+    public void PlayDropParticles(int y, int x)
+    {
+        int pos = y * glass_w + x;
+        BlockParticles bp = blocks[pos].GetComponent<BlockParticles>();
+        bp.PlayDropParticles();
+    }
 
     private void DrawBlock(int pos, Block b)
     {

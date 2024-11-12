@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bac637592df22c4db79601153b3f6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nullSprite: {fileID: 21300000, guid: 79f2c13e230a2bb48bdb79c13076f949, type: 3}
   relicDataMap:
     _map:
     - name: Null
@@ -52,62 +53,93 @@ MonoBehaviour:
         max_count: 0
         name: NULL
         description: NULL
+        nameRus: NULL
+        descriptionRus: NULL
         show_value: 0
     - name: LED
       value:
         sprite: {fileID: 21300000, guid: 8558c9b7f25230d42a140a99f6797cb8, type: 3}
         max_count: -1
-        name: 
-        description: +5% energy
+        name: LED
+        description: <color=#F2F991>+1 line energy</color>
+        nameRus: "\u0421\u0432\u0435\u0442\u043E\u0434\u0438\u043E\u0434"
+        descriptionRus: "<color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color>"
         show_value: 0
     - name: Battery
       value:
         sprite: {fileID: 21300000, guid: bde97c30d736aaf40ac842d0a2c99d81, type: 3}
         max_count: -1
-        name: 
-        description: Heal 1 HP for each cleared line
+        name: Battery
+        description: <color=#70FFAB>Heal 1 HP</color> for each cleared line
+        nameRus: "\u0411\u0430\u0442\u0430\u0440\u0435\u044F"
+        descriptionRus: "<color=#70FFAB>\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438
+          1 HP</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u0443\u044E \u043E\u0447\u0438\u0449\u0435\u043D\u043D\u0443\u044E
+          \u043B\u0438\u043D\u0438\u044E"
         show_value: 0
     - name: Discount
       value:
         sprite: {fileID: 21300000, guid: 873068c0091c3354e8cd108616868677, type: 3}
         max_count: -1
-        name: Promocode
-        description: Get 10% discount in the shop
+        name: Promo Code
+        description: Get a 20% discount on pieces in the shop
+        nameRus: "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 \u0441\u043A\u0438\u0434\u043A\u0443
+          20% \u043D\u0430 \u0444\u0438\u0433\u0443\u0440\u044B \u0432 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0435"
         show_value: 0
     - name: Telescope
       value:
         sprite: {fileID: 21300000, guid: 8e12e18174f51984bbac391de1e5ef4a, type: 3}
         max_count: 3
-        name: 
+        name: Telescope
         description: You can see one more piece in the queue
+        nameRus: "\u0422\u0435\u043B\u0435\u0441\u043A\u043E\u043F"
+        descriptionRus: "\u0422\u044B \u0432\u0438\u0434\u0438\u0448\u044C \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u0443\u044E
+          \u0444\u0438\u0433\u0443\u0440\u0443 \u0432 \u043E\u0447\u0435\u0440\u0435\u0434\u0438"
         show_value: 0
     - name: Trashcan
       value:
         sprite: {fileID: 21300000, guid: 7c768127175fc154a823969474279d4f, type: 3}
         max_count: 1
-        name: 
-        description: If you place 5 pieces while holding one, it will be deleted
+        name: Trashcan
+        description: If you hold piece for 5 turns, holding slot will be cleared
+        nameRus: "\u041A\u043E\u0440\u0437\u0438\u043D\u0430"
+        descriptionRus: "\u0415\u0441\u043B\u0438 \u0442\u044B \u0434\u0435\u0440\u0436\u0438\u0448\u044C
+          \u0444\u0438\u0433\u0443\u0440\u0443 \u0432 \u0442\u0435\u0447\u0435\u043D\u0438\u0438
+          5 \u0445\u043E\u0434\u043E\u0432, \u0441\u043B\u043E\u0442 \u0434\u043B\u044F
+          \u0443\u0434\u0435\u0440\u0436\u0430\u043D\u0438\u044F \u043E\u0447\u0438\u0449\u0430\u0435\u0442\u0441\u044F"
         show_value: 1
     - name: BatterySlot
       value:
         sprite: {fileID: 21300000, guid: 09d7f9bff84ed56419875d4975599b0c, type: 3}
         max_count: 1
-        name: Battery Slot
-        description: +50% energy while holding piece, but you can't unhold piece
+        name: Energy Cell
+        description: Line energy is doubled, but you can't unhold a piece
+        nameRus: "\u042D\u043D\u0435\u0440\u0433\u043E-\u044F\u0447\u0435\u0439\u043A\u0430"
+        descriptionRus: "\u042D\u043D\u0435\u0440\u0433\u0438\u044F \u0437\u0430
+          \u043B\u0438\u043D\u0438\u044E \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0430
+          \u0432 2 \u0440\u0430\u0437\u0430, \u043D\u043E \u043D\u0435\u043B\u044C\u0437\u044F
+          \u0437\u0430\u043C\u0435\u043D\u0438\u0442\u044C \u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u0443\u044E
+          \u0444\u0438\u0433\u0443\u0440\u0443"
         show_value: 0
     - name: Resistor
       value:
         sprite: {fileID: 21300000, guid: 4af04c8bdf1503c498a951b6754e3c90, type: 3}
-        max_count: -1
-        name: 
-        description: -10% damage from overflow
+        max_count: 3
+        name: Resistor
+        description: -1 damage from overflow
+        nameRus: "\u0420\u0435\u0437\u0438\u0441\u0442\u043E\u0440"
+        descriptionRus: "-1 \u0443\u0440\u043E\u043D\u0430 \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0438"
         show_value: 0
     - name: Transistor
       value:
         sprite: {fileID: 21300000, guid: 54e9bb48ca6acdb4db08ddd1b1331955, type: 3}
         max_count: -1
-        name: 
-        description: +10% energy after line clear
+        name: Transistor
+        description: <color=#67F9F7>+0.1 combo per line</color>
+        nameRus: "\u0422\u0440\u0430\u043D\u0437\u0438\u0441\u0442\u043E\u0440"
+        descriptionRus: "<color=#67F9F7>+0.1 \u043A\u043E\u043C\u0431\u043E \u0437\u0430
+          \u043B\u0438\u043D\u0438\u044E</color>"
         show_value: 0
     - name: LaserModule
       value:
@@ -115,14 +147,22 @@ MonoBehaviour:
         max_count: 1
         name: Laser Module
         description: On overflow lines will be removed above the laser instead of
-          the glass bottom
+          the matrix bottom
+        nameRus: "\u041B\u0430\u0437\u0435\u0440\u043D\u044B\u0439 \u043C\u043E\u0434\u0443\u043B\u044C"
+        descriptionRus: "\u041F\u0440\u0438 \u043F\u0435\u0440\u0435\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0438
+          \u043B\u0438\u043D\u0438\u0438 \u0443\u0434\u0430\u043B\u044F\u044E\u0442\u0441\u044F
+          \u043D\u0430\u0434 \u043B\u0430\u0437\u0435\u0440\u043E\u043C, \u0430 \u043D\u0435
+          \u0441\u043D\u0438\u0437\u0443"
         show_value: 0
     - name: ExtraSpace
       value:
-        sprite: {fileID: 1937585203025217053, guid: 0e5bae5ca408b13439865534adb598b7, type: 3}
+        sprite: {fileID: 21300000, guid: 7a3979cb9114e9f4c8790aa16b51ca6e, type: 3}
         max_count: 1
         name: Area upgrade
         description: Laser is 1 block higher
+        nameRus: "\u0420\u0430\u0441\u0448\u0438\u0440\u0435\u043D\u0438\u0435"
+        descriptionRus: "\u041B\u0430\u0437\u0435\u0440 \u043D\u0430 1 \u0431\u043B\u043E\u043A
+          \u0432\u044B\u0448\u0435"
         show_value: 0
     - name: Drone
       value:
@@ -130,84 +170,129 @@ MonoBehaviour:
         max_count: -1
         name: Parachute
         description: -10% fall speed
+        nameRus: "\u041F\u0430\u0440\u0430\u0448\u044E\u0442"
+        descriptionRus: "-10% \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u043F\u0430\u0434\u0435\u043D\u0438\u044F"
         show_value: 0
     - name: ExtraWeight
       value:
         sprite: {fileID: 21300000, guid: 2cc09a1c547e60b44a82735b36eae248, type: 3}
         max_count: -1
         name: Speed up
-        description: +15% energy, but +30% fall speed
+        description: <color=#F2F991>+2 line energy</color>, but +30% fall speed
+        nameRus: "\u0423\u0441\u043A\u043E\u0440\u0435\u043D\u0438\u0435"
+        descriptionRus: "<color=#F2F991>+2 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color>, \u043D\u043E +30%
+          \u0441\u043A\u043E\u0440\u043E\u0441\u0442\u044C \u043F\u0430\u0434\u0435\u043D\u0438\u044F"
         show_value: 0
     - name: Detonator
       value:
         sprite: {fileID: 21300000, guid: 3bd051543e330b44a93825f35a1dcbaa, type: 3}
         max_count: -1
-        name: 
+        name: Detonator
         description: Gain 1 energy for each exploded block
+        nameRus: "\u0414\u0435\u0442\u043E\u043D\u0430\u0442\u043E\u0440"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 1 \u044D\u043D\u0435\u0440\u0433\u0438\u044E
+          \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0439 \u0432\u0437\u043E\u0440\u0432\u0430\u043D\u043D\u044B\u0439
+          \u0431\u043B\u043E\u043A"
         show_value: 0
     - name: ShockModule
       value:
-        sprite: {fileID: 21300000, guid: f7a699c6594ce2747b7079f475f5c77f, type: 3}
+        sprite: {fileID: 21300000, guid: 884efdfa34bd1c9478c3e6fe9fe53770, type: 3}
         max_count: 1
-        name: Shock Module
-        description: Gain 5 energy from each block, that caused explotion, but you
-          gain no energy from clearing lines
+        name: Shockwave Module
+        description: Gain 10 energy for each explosion, but <color=#AA9E15>-5 line
+          energy</color>.
+        nameRus: "\u0418\u043C\u043F\u0443\u043B\u044C\u0441\u043D\u044B\u0439 \u043C\u043E\u0434\u0443\u043B\u044C"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 10 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0439 \u0432\u0437\u0440\u044B\u0432,
+          \u043D\u043E <color=#AA9E15>-5 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color>."
         show_value: 0
     - name: NetworkUpgrade
       value:
         sprite: {fileID: 21300000, guid: 74f83ea7c4bb0564198085c74cc8f87d, type: 3}
         max_count: -1
         name: Wi-Fi
-        description: +1% energy for each block in matrix
+        description: <color=#F2F991>+1 line energy</color> for every 10 blocks in
+          matrix
+        nameRus: Wi-Fi
+        descriptionRus: "<color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0435
+          10 \u0431\u043B\u043E\u043A\u043E\u0432 \u0432 \u043C\u0430\u0442\u0440\u0438\u0446\u0435"
         show_value: 0
     - name: LaserRoulette
       value:
         sprite: {fileID: 21300000, guid: a0040052f2c33f1458ed0e4983e3bd42, type: 3}
         max_count: 1
         name: Height Upgrade
-        description: +10% energy for each block in the line under the laser
+        description: <color=#F2F991>+1 line energy</color> for each block in the
+          line under the laser
+        nameRus: "\u0412\u044B\u0441\u043E\u0442\u043D\u043E\u0435 \u0443\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435"
+        descriptionRus: "<color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0439
+          \u0431\u043B\u043E\u043A \u0432 \u043B\u0438\u043D\u0438\u0438 \u043F\u043E\u0434
+          \u043B\u0430\u0437\u0435\u0440\u043E\u043C"
         show_value: 0
     - name: RecyclingProtocol
       value:
         sprite: {fileID: 21300000, guid: 0e5978ad950391b4d97228e239a87bb6, type: 3}
         max_count: -1
         name: Recycling Protocol
-        description: +1% energy for all empty blocks below the laser
+        description: <color=#F2F991>+1 line energy</color> for every 20 empty cells
+          in matrix (below the laser)
+        nameRus: "\u041F\u0440\u043E\u0442\u043E\u043A\u043E\u043B \u043F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u043A\u0438"
+        descriptionRus: "<color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0435
+          20 \u043F\u0443\u0441\u0442\u044B\u0445 \u043A\u043B\u0435\u0442\u043E\u043A
+          \u0432 \u043C\u0430\u0442\u0440\u0438\u0446\u0435 (\u043D\u0438\u0436\u0435
+          \u043B\u0430\u0437\u0435\u0440\u0430)"
         show_value: 0
     - name: CleanContract
       value:
         sprite: {fileID: 21300000, guid: 6eb87bdc0f9fefa45b593e8c31fba768, type: 3}
         max_count: -1
         name: Clean Contract
-        description: +100% clear energy if matrix is cleared
-        show_value: 0
-    - name: ComboUpgrade
-      value:
-        sprite: {fileID: 21300000, guid: 4ab03ac62ebdea544b4e31346eb7b43a, type: 3}
-        max_count: 1
-        name: combo module
-        description: Energy from combo clear is multiplyed by combo count
+        description: Gain 30 energy if there are no blocks in matrix at the end of
+          the turn
+        nameRus: "\u041A\u043E\u043D\u0442\u0440\u0430\u043A\u0442 \u043F\u043E \u043E\u0447\u0438\u0441\u0442\u043A\u0435"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 30 \u044D\u043D\u0435\u0440\u0433\u0438\u0438,
+          \u0435\u0441\u043B\u0438 \u0432 \u043A\u043E\u043D\u0446\u0435 \u0445\u043E\u0434\u0430
+          \u0432 \u043C\u0430\u0442\u0440\u0438\u0446\u0435 \u043D\u0435\u0442 \u0431\u043B\u043E\u043A\u043E\u0432"
         show_value: 0
     - name: ParallelModule
       value:
         sprite: {fileID: 21300000, guid: 9165a1d150c8d0646842da7f23db3419, type: 3}
         max_count: -1
         name: Parallel module
-        description: +20% energy for clearing more than 1 line
+        description: <color=#67F9F7>+0.2 combo per line</color> for clearing multiple
+          lines at once
+        nameRus: "\u041F\u0430\u0440\u0430\u043B\u043B\u0435\u043B\u044C\u043D\u044B\u0439
+          \u043C\u043E\u0434\u0443\u043B\u044C"
+        descriptionRus: "<color=#67F9F7>+0.2 \u043A\u043E\u043C\u0431\u043E \u0437\u0430
+          \u043B\u0438\u043D\u0438\u044E</color> \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435
+          \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445 \u043B\u0438\u043D\u0438\u0439
+          \u0437\u0430 \u0440\u0430\u0437"
         show_value: 0
     - name: OverchargeModule
       value:
         sprite: {fileID: 21300000, guid: 38854d73150ff054a90c520f1bd11f25, type: 3}
         max_count: 1
         name: Overcharger
-        description: Convert extra energy to $ after level
+        description: Convert extra energy to $ after the level
+        nameRus: "\u041F\u0435\u0440\u0435\u0433\u0440\u0443\u0437\u0447\u0438\u043A"
+        descriptionRus: "\u041A\u043E\u043D\u0432\u0435\u0440\u0442\u0438\u0440\u0443\u0435\u0442
+          \u043B\u0438\u0448\u043D\u044E\u044E \u044D\u043D\u0435\u0440\u0433\u0438\u044E
+          \u0432 $ \u043F\u043E\u0441\u043B\u0435 \u0443\u0440\u043E\u0432\u043D\u044F"
         show_value: 0
     - name: Timer
       value:
         sprite: {fileID: 21300000, guid: 0848eecc7b2669a44aa46f476921a777, type: 3}
         max_count: -1
-        name: 
+        name: Timer
         description: +1 turn before laser drop
+        nameRus: "\u0422\u0430\u0439\u043C\u0435\u0440"
+        descriptionRus: "+1 \u0445\u043E\u0434 \u043F\u0435\u0440\u0435\u0434 \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u0435\u043C
+          \u043B\u0430\u0437\u0435\u0440\u0430"
         show_value: 0
     - name: DeathLaser
       value:
@@ -216,6 +301,161 @@ MonoBehaviour:
         name: Death Laser
         description: +2 laser height, +2 turns before laser drop, on overflow take
           9999 damage
+        nameRus: "\u041B\u0443\u0447 \u0441\u043C\u0435\u0440\u0442\u0438"
+        descriptionRus: "+2 \u0432\u044B\u0441\u043E\u0442\u0430 \u043B\u0430\u0437\u0435\u0440\u0430,
+          +2 \u0445\u043E\u0434\u0430 \u043F\u0435\u0440\u0435\u0434 \u043F\u043E\u043D\u0438\u0436\u0435\u043D\u0438\u0435\u043C
+          \u043B\u0430\u0437\u0435\u0440\u0430, \u043F\u0440\u0438 \u043F\u0435\u0440\u0435\u043F\u043E\u043B\u043D\u0435\u043D\u0438\u0438
+          \u043F\u043E\u043B\u0443\u0447\u0438 9999 \u0443\u0440\u043E\u043D\u0430"
+        show_value: 0
+    - name: Fuse
+      value:
+        sprite: {fileID: 21300000, guid: 11b09bc3b8da3ff46b9d0d3600815b53, type: 3}
+        max_count: 1
+        name: Fuse
+        description: <color=#AA9E15>-5 line energy</color>, but the combo doesn't
+          reset.
+        nameRus: "\u041F\u0440\u0435\u0434\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u0435\u043B\u044C"
+        descriptionRus: "\u041A\u043E\u043C\u0431\u043E \u0431\u043E\u043B\u044C\u0448\u0435
+          \u043D\u0435 \u0441\u0431\u0440\u0430\u0441\u044B\u0432\u0430\u0435\u0442\u0441\u044F,
+          \u043D\u043E <color=#AA9E15>-5 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color>."
+        show_value: 0
+    - name: Diamond
+      value:
+        sprite: {fileID: 21300000, guid: d3eb57ecc03eec14b9b24b02618bec91, type: 3}
+        max_count: 1
+        name: Diamond
+        description: The rarity of pieces in the store is increased
+        nameRus: "\u0411\u0440\u0438\u043B\u043B\u0438\u0430\u043D\u0442"
+        descriptionRus: "\u0420\u0435\u0434\u043A\u043E\u0441\u0442\u044C \u0444\u0438\u0433\u0443\u0440
+          \u0432 \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0435 \u043F\u043E\u0432\u044B\u0448\u0435\u043D\u0430"
+        show_value: 0
+    - name: BlockChain
+      value:
+        sprite: {fileID: 21300000, guid: f5e92646c60fc5d44aba73d6be66e538, type: 3}
+        max_count: -1
+        name: Blockchain
+        description: <color=#F2F991>+1 line energy</color> for each 100$
+        nameRus: "\u0411\u043B\u043E\u043A\u0447\u0435\u0439\u043D"
+        descriptionRus: "<color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438
+          \u0437\u0430 \u043B\u0438\u043D\u0438\u044E</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0435
+          100$"
+        show_value: 0
+    - name: Museum
+      value:
+        sprite: {fileID: 21300000, guid: b99ef1ae3fc0665409d4837b36042fa4, type: 3}
+        max_count: -1
+        name: Museum
+        description: If you have at least 25 pieces in inventory, energy is doubled
+        nameRus: "\u041C\u0443\u0437\u0435\u0439"
+        descriptionRus: "\u0415\u0441\u043B\u0438 \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435
+          \u0445\u043E\u0442\u044F \u0431\u044B 25 \u0444\u0438\u0433\u0443\u0440,
+          \u044D\u043D\u0435\u0440\u0433\u0438\u044F \u0443\u0434\u0432\u0430\u0438\u0432\u0430\u0435\u0442\u0441\u044F"
+        show_value: 1
+    - name: Square
+      value:
+        sprite: {fileID: 5534753076561998702, guid: 23a9e264ccd289d4995736553338356a, type: 3}
+        max_count: -1
+        name: Power square
+        description: Get 1 token for each 4-line clear. <color=#F2F991>+1 line energy</color>
+          for each token
+        nameRus: "\u041A\u0432\u0430\u0434\u0440\u0430\u0442 \u044D\u043D\u0435\u0440\u0433\u0438\u0438"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 1 \u0442\u043E\u043A\u0435\u043D
+          \u0437\u0430 \u043E\u0447\u0438\u0441\u0442\u043A\u0443 4 \u043B\u0438\u043D\u0438\u0439.
+          <color=#F2F991>+1 \u044D\u043D\u0435\u0440\u0433\u0438\u0438 \u0437\u0430
+          \u043B\u0438\u043D\u0438\u044E</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0439
+          \u0442\u043E\u043A\u0435\u043D"
+        show_value: 1
+    - name: Triangle
+      value:
+        sprite: {fileID: -4494178901239082258, guid: b4c848f4fc1cc144e8e6c18eee499a75, type: 3}
+        max_count: -1
+        name: Damage triangle
+        description: Get 1 token each time you take damage. Get 3 energy for each
+          token on every 3-line clear
+        nameRus: "\u0422\u0440\u0435\u0443\u0433\u043E\u043B\u044C\u043D\u0438\u043A
+          \u0443\u0440\u043E\u043D\u0430"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 1 \u0442\u043E\u043A\u0435\u043D
+          \u043F\u0440\u0438 \u043F\u043E\u043B\u0443\u0447\u0435\u043D\u0438\u0438
+          \u0443\u0440\u043E\u043D\u0430. \u041F\u043E\u043B\u0443\u0447\u0438 3
+          \u044D\u043D\u0435\u0440\u0433\u0438\u0438 \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0439
+          \u0442\u043E\u043A\u0435\u043D \u043F\u0440\u0438 \u043E\u0447\u0438\u0441\u0442\u043A\u0435
+          3 \u043B\u0438\u043D\u0438\u0439"
+        show_value: 1
+    - name: Circle
+      value:
+        sprite: {fileID: -6515237859058575313, guid: c923e276de4439c47bf1335179418687, type: 3}
+        max_count: -1
+        name: Healing circle
+        description: Get tokens equal to healing. <color=#70FFAB>Heal 1 HP</color>
+          at the end of the level for each 10 tokens
+        nameRus: "\u041A\u0440\u0443\u0433 \u043B\u0435\u0447\u0435\u043D\u0438\u044F"
+        descriptionRus: "\u041F\u043E\u043B\u0443\u0447\u0438 \u0442\u043E\u043A\u0435\u043D\u044B
+          \u0432 \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u0435, \u0440\u0430\u0432\u043D\u043E\u043C
+          \u043B\u0435\u0447\u0435\u043D\u0438\u044E. <color=#70FFAB>\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u0438
+          1 HP</color> \u0437\u0430 \u043A\u0430\u0436\u0434\u044B\u0435 10 \u0442\u043E\u043A\u0435\u043D\u043E\u0432
+          \u0432 \u043A\u043E\u043D\u0446\u0435 \u0443\u0440\u043E\u0432\u043D\u044F"
+        show_value: 1
+    - name: CloneMachine
+      value:
+        sprite: {fileID: -5390590877083807261, guid: 46fb09400eb619042af47994c525afc1, type: 3}
+        max_count: 1
+        name: Clone machine
+        description: Press <color=#67F9F7>Shift/C</color> twice to replace held piece
+          with current. Can be used once per level.
+        nameRus: "\u0410\u043F\u043F\u0430\u0440\u0430\u0442 \u0434\u043B\u044F \u043A\u043B\u043E\u043D\u0438\u0440\u043E\u0432\u0430\u043D\u0438\u044F"
+        descriptionRus: "\u041D\u0430\u0436\u043C\u0438\u0442\u0435 <color=#67F9F7>Shift/C</color>
+          \u0434\u0432\u0430\u0436\u0434\u044B \u0447\u0442\u043E\u0431\u044B \u0437\u0430\u043C\u0435\u043D\u0438\u0442\u044C
+          \u0443\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u043C\u0443\u044E
+          \u0444\u0438\u0433\u0443\u0440\u0443 \u0442\u0435\u043A\u0443\u0449\u0435\u0439.
+          \u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E 1 \u0440\u0430\u0437 \u0437\u0430
+          \u0443\u0440\u043E\u0432\u0435\u043D\u044C."
+        show_value: 1
+    - name: Fertilizer
+      value:
+        sprite: {fileID: 21300000, guid: 845e6c9b281197340b63207fd750f95c, type: 3}
+        max_count: 1
+        name: Fertilizer
+        description: <color=#20B25C>Bush</color> block grow in corner-adjacent cells
+        nameRus: "\u0423\u0434\u043E\u0431\u0440\u0435\u043D\u0438\u0435"
+        descriptionRus: "\u0411\u043B\u043E\u043A <color=#20B25C>\u041A\u0443\u0441\u0442</color>
+          \u0440\u0430\u0441\u0442\u0451\u0442 \u0432 \u043A\u043B\u0435\u0442\u043A\u0430\u0445,
+          \u0441\u043E\u0441\u0435\u0434\u043D\u0438\u0445 \u043F\u043E \u0443\u0433\u043B\u0443"
+        show_value: 0
+    - name: BombUpgrade
+      value:
+        sprite: {fileID: 21300000, guid: b90134bc0249d804a87fc88019816ac0, type: 3}
+        max_count: 1
+        name: Bomb Upgrade
+        description: Explosion area of blocks <color=#BABABA>Bomb</color> and <color=#00903C>Grenade</color>
+          is increased
+        nameRus: "\u0423\u043B\u0443\u0447\u0448\u0435\u043D\u0438\u0435 \u0431\u043E\u043C\u0431"
+        descriptionRus: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0430 \u043E\u0431\u043B\u0430\u0441\u0442\u044C
+          \u0432\u0437\u0440\u044B\u0432\u0430 \u0431\u043B\u043E\u043A\u043E\u0432
+          <color=#BABABA>\u0411\u043E\u043C\u0431\u0430</color> \u0438 <color=#00903C>\u0413\u0440\u0430\u043D\u0430\u0442\u0430</color>"
+        show_value: 0
+    - name: LaserSplitter
+      value:
+        sprite: {fileID: 21300000, guid: 40a3d1c21e1cfdc40ae7d7e6d4176cfd, type: 3}
+        max_count: 1
+        name: Laser Splitter
+        description: <color=#FF4CC0>Laser target</color> block explodes in 4 directions
+        nameRus: "\u0420\u0430\u0437\u0434\u0435\u043B\u0438\u0442\u0435\u043B\u044C
+          \u043B\u0430\u0437\u0435\u0440\u0430"
+        descriptionRus: "\u0411\u043B\u043E\u043A <color=#FF4CC0>\u041B\u0430\u0437\u0435\u0440\u043D\u0430\u044F
+          \u043C\u0435\u0442\u043A\u0430</color> \u0432\u0437\u0440\u044B\u0432\u0430\u0435\u0442\u0441\u044F
+          \u0432 4 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F\u0445"
+        show_value: 0
+    - name: DoubleSun
+      value:
+        sprite: {fileID: 21300000, guid: 8c5b4b5f58241054091eaa4a127e02d9, type: 3}
+        max_count: 1
+        name: Mega-sun
+        description: <color=#BF51FE>Solar panel</color> block is always active
+        nameRus: "\u041C\u0435\u0433\u0430-\u0441\u043E\u043B\u043D\u0446\u0435"
+        descriptionRus: "\u0411\u043B\u043E\u043A <color=#BF51FE>\u0421\u043E\u043B\u043D\u0435\u0447\u043D\u0430\u044F
+          \u043F\u0430\u043D\u0435\u043B\u044C</color> \u0432\u0441\u0435\u0433\u0434\u0430
+          \u0430\u043A\u0442\u0438\u0432\u0435\u043D."
         show_value: 0
     _orphaned:
     - name: ShockModule
@@ -225,6 +465,8 @@ MonoBehaviour:
         name: 
         description: Gain 5 energy from each block, that caused explotion, but you
           gain no energy from clearing lines
+        nameRus: 
+        descriptionRus: 
         show_value: 0
     - name: EmergencySupply
       value:
@@ -232,6 +474,37 @@ MonoBehaviour:
         max_count: 1
         name: Danger Module
         description: +10% energy for each block in the line under the laser
+        nameRus: 
+        descriptionRus: 
+        show_value: 0
+    - name: ComboUpgrade
+      value:
+        sprite: {fileID: 21300000, guid: 4ab03ac62ebdea544b4e31346eb7b43a, type: 3}
+        max_count: 1
+        name: Combo Module
+        description: 
+        nameRus: "\u041A\u043E\u043C\u0431\u043E \u041C\u043E\u0434\u0443\u043B\u044C"
+        descriptionRus: 
+        show_value: 0
+    - name: Multimeter
+      value:
+        sprite: {fileID: 0}
+        max_count: -1
+        name: 
+        description: 
+        nameRus: 
+        descriptionRus: 
+        show_value: 0
+    - name: Geometry
+      value:
+        sprite: {fileID: 0}
+        max_count: 1
+        name: Geometry
+        description: Tokens of relics 'Circle', 'Triangle' and 'Square' are doubled.
+        nameRus: "\u0413\u0435\u043E\u043C\u0435\u0442\u0440\u0438\u044F"
+        descriptionRus: "\u0422\u043E\u043A\u0435\u043D\u044B \u0440\u0435\u043B\u0438\u043A\u0432\u0438\u0439
+          '\u041E\u043A\u0440\u0443\u0436\u043D\u043E\u0441\u0442\u044C', '\u0422\u0440\u0435\u0443\u0433\u043E\u043B\u044C\u043D\u0438\u043A'
+          \u0438 '\u041A\u0432\u0430\u0434\u0440\u0430\u0442' \u0443\u0434\u0432\u043E\u0435\u043D\u044B."
         show_value: 0
   relicData: []
   count: 0

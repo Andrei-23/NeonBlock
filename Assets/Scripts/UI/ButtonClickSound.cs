@@ -14,6 +14,6 @@ public class ButtonClickSound : MonoBehaviour
 
     public void OnClick()
     {
-        AudioManager.Instance.PlaySound(AudioManager.Instance.click);
+        AudioManager.Instance.PlaySound(SoundClip.UIclick);
     }
 }

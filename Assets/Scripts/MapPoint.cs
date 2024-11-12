@@ -31,7 +31,6 @@ public class MapPoint : MonoBehaviour
     [HideInInspector] public int id = 0;
 
     private Camera cam;
-    private SceneSwitcher sceneSwitcher;
     private MapManager mapManager;
     [HideInInspector] public bool is_cur_lvl = false;
 
@@ -39,13 +38,12 @@ public class MapPoint : MonoBehaviour
 
     private void Awake()
     {
-        cam = Camera.main;
-        mapManager = cam.GetComponent<MapManager>();
-        sceneSwitcher = cam.GetComponent<SceneSwitcher>();
+
     }
     void Start()
     {
-
+        cam = Camera.main;
+        mapManager = cam.GetComponent<MapManager>();
     }
 
     private void OnDrawGizmos()
@@ -133,29 +131,31 @@ public class MapPoint : MonoBehaviour
         Stats.Instance.cur_lvl_id = id;
         PlayerStatEventManager.Instance.EnterMapPoint();
 
+        AudioManager.Instance.PlaySound(SoundClip.openLevel);
+
         chosen_type = type;
         switch(type)
         {
-            case Type.shop: sceneSwitcher.LoadScene(2); break;
-            case Type.unknown_piece: sceneSwitcher.LoadScene(1); break;
-            case Type.unknown_delete: sceneSwitcher.LoadScene(8); break;
-            case Type.unknown_relic: sceneSwitcher.LoadScene(5); break;
+            case Type.shop: SceneSwitcher.LoadScene(2); break;
+            case Type.unknown_piece: SceneSwitcher.LoadScene(1); break;
+            case Type.unknown_delete: SceneSwitcher.LoadScene(8); break;
+            case Type.unknown_relic: SceneSwitcher.LoadScene(5); break;
 
             case Type.level:
                 MapDataSaver.Instance.curLevelDifficulty = LevelDataManager.LevelType.standart;
-                sceneSwitcher.OpenLevel(); 
+                SceneSwitcher.OpenLevel(); 
                 break;
             case Type.unknown_level:
                 MapDataSaver.Instance.curLevelDifficulty = LevelDataManager.LevelType.standart;
-                sceneSwitcher.OpenLevel();
+                SceneSwitcher.OpenLevel();
                 break;
             case Type.danger_level:
                 MapDataSaver.Instance.curLevelDifficulty = LevelDataManager.LevelType.miniboss;
-                sceneSwitcher.OpenLevel();
+                SceneSwitcher.OpenLevel();
                 break;
             case Type.boss:
                 MapDataSaver.Instance.curLevelDifficulty = LevelDataManager.LevelType.boss;
-                sceneSwitcher.OpenLevel();
+                SceneSwitcher.OpenLevel();
                 break;
             default: Debug.LogError("Unexpected event type"); break;
         }

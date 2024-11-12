@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: UI Text Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: UI Text
+  m_TableCollectionNameGuidString: add9e08792b560a4dbd38b2fc6357144
+  m_Entries:
+  - m_Id: 169368383488
+    m_Key: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 203119947776
+    m_Key: Volume Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 208572542976
+    m_Key: Volume Music
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211210760192
+    m_Key: Volume SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 213496655872
+    m_Key: Tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 218991194112
+    m_Key: Shop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46494810140672
+    m_Key: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46599965536256
+    m_Key: Start Top Warning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46792635084800
+    m_Key: Start Energy Task
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54422233444352
+    m_Key: Helath
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54936119570432
+    m_Key: Truns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 55170182705152
+    m_Key: Energy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84632823689216
+    m_Key: Choose new piece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87189646241792
+    m_Key: Choose Relic
+    m_Metadata:
+      m_Items: []
+  - m_Id: 87605545037824
+    m_Key: Delete Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 88677269401600
+    m_Key: You win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89714868908032
+    m_Key: Result Pixels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89846318395392
+    m_Key: Result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 89996084408320
+    m_Key: Result Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90241803513856
+    m_Key: Piece Amount
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90349987196928
+    m_Key: Result Turns
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90531759943680
+    m_Key: Result Levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90659199676416
+    m_Key: Result Minibosses
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90761335173120
+    m_Key: Result Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92560968413184
+    m_Key: Game over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 113451144081408
+    m_Key: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4064684045266944
+    m_Key: Extra Pieces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30787703815827456
+    m_Key: Line Cost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 30789555873673216
+    m_Key: Default Combo
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 3534170296176345119
+  references:
+    version: 2
+    RefIds:
+    - rid: 3534170296176345119
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1715105927114

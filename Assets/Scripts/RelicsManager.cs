@@ -8,18 +8,19 @@ using static BlockDataManager;
 public class RelicsManager : MonoBehaviour
 {
     public static RelicsManager Instance;
+    [SerializeField] private Sprite nullSprite;
 
     public enum RelicType
     {
         Null = 0, // empty (used in hint code)
-        LED, // +5% energy
+        LED, // + line energy
         Battery, // +1 hp each line clear
         Discount, // - costs in shop
         Telescope, // +1 piece in queue
         Trashcan, // remove hold piece after 5 turns
-        BatterySlot, // + enregy when hold piece, can't hold if already holding
+        BatterySlot, // x2 line energy, can't hold if already holding
         Resistor, // - overflow damage
-        Transistor, // + clear energy 
+        Transistor, // +combo
         
         LaserModule, // lines removed from top on overflow
         ExtraSpace, // laser 1 block higher
@@ -30,18 +31,39 @@ public class RelicsManager : MonoBehaviour
         Detonator, // + explotion damage
         ShockModule, // ++ explotion damage, - line damage
         
-        NetworkUpgrade, // + energy for each block in glass
+        NetworkUpgrade, // + energy for each 10 blockû in glass
         LaserRoulette, // + energy for blocks under laser
 
-        RecyclingProtocol, // +++ energy, - energy for each block
+        RecyclingProtocol, // + energy for each 10 empty blocks in glass
         CleanContract, // +$ if matrix(glass) is clear
 
-        ComboUpgrade, // + energy for combo
+        //ComboUpgrade, // + energy for combo TODO
         ParallelModule, // + energy for clearing multiple lines
         OverchargeModule, // extra $ for extra energy
 
         Timer, // + turns before laser move
-        DeathLaser // +laser height, +turns, death on overflow
+        DeathLaser, // +laser height, +turns, death on overflow
+
+        //Multimeter, // TODO
+        Fuse, // no combo reset, - line enrgy
+
+        Diamond, // increase rarity of pieces in shop
+        BlockChain, // more energy for money
+        Museum, // if you have >= 25 pieces, energy is doubled
+
+        Square, // tetris gives 1 token, +line energy for token
+        Triangle, // Get token when damaged. Get energy for tokens when clear triple.
+        Circle, // tokens when heal. Heal 0.1 of tokens at the end of the level.
+        //Geometry, // x2 tokens of square, triangle and circle.
+
+        CloneMachine, // duplicate 
+
+        //BLOCKS
+        Fertilizer, // bushes grow in corner-adjacent cells
+        BombUpgrade, // increased area of bombs and grenades
+        LaserSplitter, // laser target is 4-directional
+        DoubleSun, // Solar panels now always active
+
     } 
 
     [System.Serializable]
@@ -52,6 +74,8 @@ public class RelicsManager : MonoBehaviour
         public int max_count = -1; // limit of amount, -1 means infinite
         public string name = string.Empty;
         public string description = string.Empty;
+        public string nameRus = string.Empty;
+        public string descriptionRus = string.Empty;
         public bool show_value = false;
 
         //public RelicData() { 
@@ -87,16 +111,28 @@ public class RelicsManager : MonoBehaviour
             relicData.Add(new RelicData());
         }
 
+        //string text_eng = "", text_rus = ""; // print all text to check it for mistakes
         foreach (RelicType type in Enum.GetValues(typeof(RelicType)))
         {
             int id = (int)type;
             relicData[id] = relicDataMap[type];
+
             if (relicData[id].name == string.Empty)
             {
-                relicData[id].name = EnumToString(type);
+                relicData[id].nameRus = relicData[id].name = EnumToString(type);
             }
+
+            if (relicData[id].sprite == null)
+            {
+                relicData[id].sprite = nullSprite;
+            }
+
+            //text_eng += relicData[id].name + ' ' + relicData[id].description + ' ';
+            //text_rus += relicData[id].nameRus + ' ' + relicData[id].descriptionRus + ' ';
         }
 
+        //Debug.Log(text_eng);
+        //Debug.Log(text_rus);
     }
 
     void OnValidate()
@@ -243,15 +279,28 @@ public class RelicsManager : MonoBehaviour
         if (!IsValidId(id)) return null;
         return relicData[id].sprite;
     }
+    public string GetName(RelicType type, int lang)
+    {
+        if (lang == 0) return relicData[(int)type].name;
+        else return relicData[(int)type].nameRus;
+    }
     public string GetName(RelicType type)
     {
-        return relicData[(int)type].name;
+        int lang = LanguageSettings.GetLanguage();
+        //int lang = 0;
+        return GetName(type, lang);
+    }
+    public string GetDescription(RelicType type, int lang)
+    {
+        if (lang == 0) return relicData[(int)type].description;
+        else return relicData[(int)type].descriptionRus;
     }
     public string GetDescription(RelicType type)
     {
-        return relicData[(int)type].description;
+        int lang = LanguageSettings.GetLanguage();
+        //int lang = 0;
+        return GetDescription(type, lang);
     }
-
 
 
 

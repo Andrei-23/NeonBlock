@@ -40,6 +40,7 @@ public class RelicEvents
     public void ResetLevelValues()
     {
         rm.SetValue(Relic.Trashcan, 0);
+        rm.SetValue(Relic.CloneMachine, 1);
     }
 
     public void PutPiece()
@@ -61,7 +62,7 @@ public class RelicEvents
 
     public void ExplotionCaused()
     {
-        PlayerStatEventManager.Instance.GainEnergy(5 * rm.GetCount(Relic.ShockModule));
+        PlayerStatEventManager.Instance.GainEnergy(10 * rm.GetCount(Relic.ShockModule));
     }
     public void HoldPiece()
     {
@@ -89,6 +90,20 @@ public class RelicEvents
             case Relic.Timer:
                 Stats.Instance.turn_limit++;
                 break;
+
+            case Relic.Transistor:
+                Stats.Instance.combo_mult += 0.1f;
+                break;
+
+            case Relic.Museum:
+                rm.SetValue(Relic.Museum, Stats.Instance.piece_count);
+                break;
+
+            //case Relic.Geometry:
+            //    RelicsManager.Instance.SetValue(Relic.Square, RelicsManager.Instance.GetValue(Relic.Square));
+            //    RelicsManager.Instance.SetValue(Relic.Triangle, RelicsManager.Instance.GetValue(Relic.Triangle));
+            //    RelicsManager.Instance.SetValue(Relic.Circle, RelicsManager.Instance.GetValue(Relic.Circle));
+            //    break;
         }
     }
 }

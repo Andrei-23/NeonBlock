@@ -16,9 +16,9 @@ public class EnergyBar : MonoBehaviour
     }
     void OnValueIncreased(int amount)
     {
-        float h = Mathf.Min(1, (float)Stats.Instance.energy / Stats.Instance.energy_task);
+        float h = Mathf.Min(1, Stats.Instance.energy / Stats.Instance.energy_task);
         energyBar.transform.LeanScaleY(h, 0.5f).setEaseOutQuad();
-        if((float)Stats.Instance.energy >= Stats.Instance.energy_task)
+        if(Stats.Instance.energy >= Stats.Instance.energy_task)
         {
             energyBar.GetComponent<Image>().color = fullColor;
         }

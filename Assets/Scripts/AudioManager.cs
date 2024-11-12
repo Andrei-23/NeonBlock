@@ -1,50 +1,67 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static BlockDataManager;
+
+public enum SoundClip
+{
+    gameMusic = 0,
+    meunMusic,
+    bossMusic,
+
+    winSound,
+    loseSound,
+    UIclick,
+    UImouseEnter,
+    openLevel,
+    startLevel,
+    winLevel,
+    selectPiece,
+    selectRelic,
+
+    pieceMove,
+    pieceRotate,
+    pieceHold,
+    piecePlace,
+    lineClear,
+    lineDamage,
+    laserWarning,
+    laserDrop,
+    energyGain,
+    pixelGain,
+
+}
+
+[Serializable]
+public class SourceVariant
+{
+    public AudioSource _defaultSource;
+    public AudioSource _webSource;
+
+    public AudioSource GetSource(bool web)
+    {
+        if(_webSource == null || web == false)
+        {
+            if(_defaultSource == null)
+            {
+                Debug.LogError("No AudioSource assigned");
+            }
+            return _defaultSource;
+        }
+        return _webSource;
+    }
+}
 
 public class AudioManager : MonoBehaviour
 {
 
     public static AudioManager Instance;
 
-    [Header("Audio Sources")]
-    [SerializeField] AudioSource musicSource;
-    [SerializeField] AudioSource soundSource;
-
-    [SerializeField] AudioSource lineClearSource; // sfx
-    [SerializeField] AudioSource coinSource; // sfx
-
-    [Header("Music Clips")]
-    public AudioClip defaultMusic;
-    public AudioClip menu_music;
-    public AudioClip main_music;
-    public AudioClip boss_music;
-    public AudioClip win_music;
-    public AudioClip lose_music;
-
-    [Header("SFX Clips")]
-    public AudioClip click;
-    public AudioClip startLevel;
-    public AudioClip completeLevel;
-    public AudioClip selectItem;
-
-    public AudioClip loseSound;
-    public AudioClip winSound;
-
-    public AudioClip pieceMove;
-    public AudioClip pieceRotate;
-    public AudioClip pieceHold;
-    public AudioClip piecePlace;
-    public AudioClip pieceDrop;
-
-    public AudioClip lineClear;
-    public AudioClip lineDelete;
-    
-    public AudioClip laserWarning;
-    public AudioClip laserMove;
-
-    public AudioClip energyGain;
-    public AudioClip pixelGain;
+    [SerializeField] private bool _isWebAudio; // Editor only
+    [SerializeField] private EnumMap<SoundClip, SourceVariant> _mapSources;
+    private List<AudioSource> _sources;
 
     private void Awake()
     {
@@ -56,46 +73,97 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        LoadSourceList();
     }
+
+    void OnValidate()
+    {
+        _mapSources.TryRevise();
+    }
+    void Reset()
+    {
+        _mapSources.TryRevise();
+    }
+    private void LoadSourceList()
+    {
+        bool loadWeb = false;
+
+#if UNITY_WEBGL
+    loadWeb = true;
+#endif
+#if UNITY_EDITOR
+    loadWeb = _isWebAudio;
+#endif
+
+        Debug.Log("Load web audio: " + loadWeb.ToString());
+
+        //int n = System.Enum.GetNames(typeof(SoundClip)).Length;
+        _sources = new List<AudioSource>();
+        foreach (SoundClip sound in Enum.GetValues(typeof(SoundClip)))
+        {
+            _sources.Add(_mapSources[sound].GetSource(loadWeb));
+        }
+    }
+
+
     private void Start()
     {
-        PlayMusic(defaultMusic);
-
+        PlaySound(SoundClip.meunMusic);
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlaySound(AudioClip clip)
+    public void PlaySound(SoundClip clip)
     {
-        soundSource.PlayOneShot(clip);
+        if (_sources[(int)clip].IsUnityNull()) return;
+        _sources[(int)clip].Play();
+    }
+    public void StopSound(SoundClip clip)
+    {
+        if (_sources[(int)clip].IsUnityNull()) return;
+        _sources[(int)clip].Stop();
+    }
+    public void RestartSound(SoundClip clip)
+    {
+        StopSound(clip);
+        PlaySound(clip);
     }
 
-    public void PlayMusic(AudioClip music)
-    {
-        if (music == musicSource.clip) return;
-        musicSource.clip = music;
-        musicSource.Play();
-    }
-    public void StopMusic()
-    {
-        musicSource.Stop();
-    }
 
-
-    public void PlayClearSound(int combo = 0)
+    public void PlayClearSound(float combo = 0f)
     {
-        if (combo < 0)
+        const float max_pitch_combo = 5f;
+        const float min_pitch = 0.8f;
+        const float max_pitch = 1.4f;
+
+        if (combo < 0f)
         {
-            Debug.LogError("Incorrect combo value");
-            combo = 0;
+            Debug.LogWarning("Incorrect combo value");
         }
-        lineClearSource.pitch = Mathf.Min(1.4f, 0.8f + 0.15f * combo);
-        lineClearSource.PlayOneShot(lineClear);
-        //clearSound.pitch = 0.8f;
+
+        combo = Mathf.Clamp(combo, 1f, max_pitch_combo);
+        float val = (combo - 1f) / (max_pitch_combo - 1f);
+        float pitch = (max_pitch - min_pitch) * val + min_pitch;
+        _sources[(int)SoundClip.lineClear].pitch = pitch;
+        PlaySound(SoundClip.lineClear);
     }
 
     public void PlayCoinSound()
     {
-        coinSource.Stop();
-        coinSource.PlayOneShot(pixelGain);
+        StopSound(SoundClip.pixelGain);
+        PlaySound(SoundClip.pixelGain);
+    }
+
+    public void StopAllMusic()
+    {
+        StopSound(SoundClip.meunMusic);
+        StopSound(SoundClip.gameMusic);
+        StopSound(SoundClip.bossMusic);
+    }
+    public void SetMusic(SoundClip musicClip, bool restart = false)
+    {
+        if (!restart && _sources[(int)musicClip].isPlaying) return;
+        StopAllMusic();
+        PlaySound(musicClip);
     }
 }

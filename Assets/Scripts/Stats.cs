@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+using Relic = RelicsManager.RelicType;
 
 /// <summary>
 /// This class controls all player data (inventory, hp, money...).
@@ -43,9 +46,14 @@ public class Stats
 
     public bool test_mode; // if true, show additional functions (heal, rerolls...)
 
-    public int energy;
+    public float energy; // float or int?  (._.)
     public int energy_task;
-    //public int poison;
+
+    public float combo; // energy = line_cnt * combo
+    public float combo_mult; // combo += mult
+    public float combo_default; // on first line
+
+    //public int line_cost; // energy from 1 line
 
     public int cur_lvl_id; // id of point on map
 
@@ -57,7 +65,12 @@ public class Stats
     public DateTime start_time;
 
     //private bool createSave = false;
-    
+    public List<int> levelTasks = new List<int> {
+        30, 40, 50, 60, 75, 90, 105, 120, 140, 160, 180, 250  
+    };
+
+    private RelicsManager RM => RelicsManager.Instance;
+
     Stats()
     {
         pieces = new List<int>(new int[PieceData.Instance.count]);
@@ -73,6 +86,12 @@ public class Stats
     //    start_time = DateTime.UtcNow;
     //}
 
+    public void ResetLevelStats()
+    {
+        turn_cnt = 0;
+        energy = 0f;
+        combo = 0f;
+    }
     public void Reset()
     {
         Debug.Log("Data reset.");
@@ -91,7 +110,6 @@ public class Stats
         money = 0;
         hp = max_hp = 100;
 
-        turn_cnt = 0;
         turn_limit = 10;
 
         lvl_cnt = 0;
@@ -101,7 +119,11 @@ public class Stats
         test_mode = false;
 
         energy_task = 30;
-        energy = 0;
+
+        combo_mult = 0.5f;
+        combo_default = 1.0f;
+
+        //line_cost = 10;
 
         cur_lvl_id = -1;
 
@@ -236,6 +258,10 @@ public class Stats
         }
         pieces[id] += amount;
         piece_count += amount;
+
+        RelicsManager.Instance.SetValue(Relic.Museum, piece_count);
+
+        PlayerStatEventManager.Instance.AddPiece(id);
     }
 
     /// <summary>
@@ -278,5 +304,49 @@ public class Stats
         }
         Debug.LogWarning("Cant find this piece");
         return 0;
+    }
+    /// <summary>
+    /// Returns energy cost of one line, counted with relics
+    /// </summary>
+    /// <param name="rawValue">If true, skip multipliers and negative check, used for levels</param>
+    /// <returns></returns>
+    public int GetDefaultlineCost(bool rawValue = false)
+    {
+        int cost = 10;
+
+        // + -
+        cost += RM.GetCount(Relic.LED);
+        cost += 2 * RM.GetCount(Relic.ExtraWeight);
+        cost += 1 * RM.GetCount(Relic.BlockChain) * (Stats.Instance.money / 100);
+
+        if (RM.IsActive(Relic.ShockModule))
+        {
+            cost -= 5;
+        }
+        if (RM.IsActive(Relic.Fuse))
+        {
+            cost -= 5;
+        }
+
+        if (RM.IsActive(Relic.Square))
+        {
+            cost += RM.GetValue(Relic.Square);
+        }
+
+        if (!rawValue)
+        {
+            if (RM.IsActive(Relic.BatterySlot))
+            {
+                cost *= 2;
+            }
+            if (RM.IsActive(Relic.Museum) && RM.GetValue(Relic.Museum) >= 25)
+            {
+                cost *= 2;
+            }
+
+            cost = Mathf.Max(cost, 0);
+        }
+
+        return cost;
     }
 }

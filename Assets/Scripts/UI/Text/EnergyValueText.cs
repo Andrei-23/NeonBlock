@@ -9,39 +9,48 @@ public class EnergyValueText : MonoBehaviour
     public Color defaultColor;
     public Color increaseColor;
     public Color completeColor;
+    public float duration;
 
-    private float fade_delay = 0.5f;
-    private float fade_timer = 1f;
+    private RectTransform hp_rt;
 
     private void Awake()
     {
-        PlayerStatEventManager.Instance.OnEnergyIncrease += OnDamage;
+        PlayerStatEventManager.Instance.OnEnergyIncrease += OnEnergyIncrease;
     }
     private void OnDestroy()
     {
-        PlayerStatEventManager.Instance.OnEnergyIncrease -= OnDamage;
+        PlayerStatEventManager.Instance.OnEnergyIncrease -= OnEnergyIncrease;
     }
     private void Start()
     {
-        hpText.text = Stats.Instance.energy.ToString() + "/" + Stats.Instance.energy_task.ToString();
+        hp_rt = hpText.GetComponent<RectTransform>();
+        hpText.color = defaultColor;
+        UpdateValue();
     }
+    void UpdateValue()
+    {
+        int x = (int)(10 * Stats.Instance.energy);
+        hpText.text = (x / 10f).ToString() + "/<color=white><size=40>" + Stats.Instance.energy_task.ToString();
+    }
+
     void Update()
     {
         if(Stats.Instance.energy >= Stats.Instance.energy_task)
         {
+            LeanTween.cancel(hpText.gameObject);
             hpText.color = completeColor;
-        }
-        else
-        {
-            Color c = increaseColor + (defaultColor - increaseColor) * Mathf.Min(1f, fade_timer / fade_delay);
-            hpText.color = c;
-            fade_timer += Time.deltaTime;
         }
     }
 
-    void OnDamage(int amount)
+    void OnEnergyIncrease(int amount)
     {
-        hpText.text = Stats.Instance.energy.ToString() + "/<color=white><size=40>" + Stats.Instance.energy_task.ToString();
-        fade_timer = 0f;
+        hpText.color = increaseColor;
+        LeanTween.value(hpText.gameObject, updateColor, increaseColor, defaultColor, duration); 
+        UpdateValue();
     }
+    void updateColor(Color color)
+    {
+        hpText.color = color;
+    }
+
 }

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI Tutorial_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 136ba33209d8130408ab976f97fc396e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 67224498176
+    m_Localized: Move falling pieces to clear lines, gain energy and increase combo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8242266927104
+    m_Localized: Next piece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8677870563328
+    m_Localized: Hold piece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8913145851904
+    m_Localized: There is also a laser, it slowly moves down. If you place blocks
+      above laser, you will take damage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 9492127576064
+    m_Localized: Different blocks have unique effects. Hover nouse on block for more
+      info
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11185435209728
+    m_Localized: Combo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 11454021660672
+    m_Localized: Energy bar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 38939798125441024
+    m_Localized: If you want to see block/relic properties, hover mouse over it.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

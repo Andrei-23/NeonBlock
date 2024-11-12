@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Linq;
 using Relic = RelicsManager.RelicType;
+using System;
 
 /// <summary>
 /// This script controls generation and movement of player's pieces.
@@ -152,7 +153,25 @@ public class PieceManager : MonoBehaviour
     {
         if (holdUsed)
         {
-            return false;
+            if (!RelicsManager.Instance.IsActive(Relic.CloneMachine) || RelicsManager.Instance.GetValue(Relic.CloneMachine) == 0)
+            {
+                return false;
+            }
+            if(holdPiece == null)
+            {
+                Debug.LogWarning("No piece held");
+                return false;
+            }
+
+            RelicsManager.Instance.SetValue(Relic.CloneMachine, 0);
+
+            piece = holdPiece;
+            SetPiece(piece);
+            UpdateViews();
+            ResetPosition();
+            RelicEvents.Instance.HoldPiece();
+
+            return true;
         }
 
         if(holdPiece == null)
@@ -193,7 +212,7 @@ public class PieceManager : MonoBehaviour
     {
         holdUsed = false;
 
-        Debug.Log(Stats.Instance.turn_cnt);
+        //Debug.Log(Stats.Instance.turn_cnt);
         if (Stats.Instance.turn_cnt >= Stats.Instance.turn_limit)
         {
             Stats.Instance.turn_cnt = 0;
@@ -331,7 +350,47 @@ public class PieceManager : MonoBehaviour
     }
     public void Drop()
     {
-        MoveDownMax();
+        // Creating particles in all empty blocks on the piece path
+        HashSet<Tuple<int, int>> path = new HashSet<Tuple<int, int>>();
+        for (int it = 0; it < 20; it++)
+        {
+            for (int i = 0; i < h; i++)
+            {
+                for (int j = 0; j < w; j++)
+                {
+                    int x1 = j + x;
+                    int y1 = i + y;
+                    if (!shape[i][j].IsEmpty())
+                    {
+                        if (InBounds(y1, x1) && !glass[y1][x1].IsSolid())
+                        {
+                            path.Add(Tuple.Create(y1, x1));
+                        }
+                    }
+                }
+            }
+            if (!TryMove(0, -1)) break;
+        }
+        for (int i = 0; i < h; i++)
+        {
+            for (int j = 0; j < w; j++)
+            {
+                int x1 = j + x;
+                int y1 = i + y;
+                if (!shape[i][j].IsEmpty())
+                {
+                    if (InBounds(y1, x1))
+                    {
+                        path.Remove(Tuple.Create(y1, x1));
+                    }
+                }
+            }
+        }
+        foreach(var tp in path)
+        {
+            gameplay.drawGlass.PlayDropParticles(tp.Item1, tp.Item2);
+        }
+
         PutPiece();
     }
 
